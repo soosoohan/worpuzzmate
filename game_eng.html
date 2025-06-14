@@ -300,13 +300,28 @@ p {
 </div>
 
 <script>
-window.onload = () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const poolFile = urlParams.get('pool');
-  if (!poolFile) {
-    document.body.innerHTML = '<p>❌ 워드풀 파일이 지정되지 않았습니다.</p>';
-    return;
-  }
+
+    window.onload = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const poolFile = urlParams.get('pool');
+      if (!poolFile) {
+        document.body.innerHTML = '<p>❌ 워드풀 파일이 지정되지 않았습니다.</p>';
+        return;
+      }
+
+      fetch('/worpuzzmate/wordpools/' + poolFile)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('game-title').textContent = data.title || '게임 제목';
+          document.getElementById('game-desc').textContent = data.description || '게임 설명';
+          console.log('✅ 워드풀 로드 완료:', data);
+        })
+        .catch(err => {
+          document.body.innerHTML = '<p>❌ 워드풀 로딩 중 오류 발생: ' + err.message + '</p>';
+        });
+
+
+
 
   const gridSize = 10;
   const totalCells = gridSize * gridSize;
