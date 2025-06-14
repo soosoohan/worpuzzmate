@@ -342,7 +342,8 @@ window.onload = () => {
   }
 
   // fetch word pool JSON
-  fetch('wordpools/' + poolFile)
+
+  fetch('wordpools/' + poolFile + '.json')
     .then(res => res.json())
     .then(data => {
       document.getElementById('game-title').textContent = data.title || '게임 제목';
