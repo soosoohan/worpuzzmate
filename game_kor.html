@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <title>worpuzzmate</title>
@@ -268,10 +268,10 @@ p {
 
   <div class="player-name-row">
     <div class="player-input">
-      <input type="text" id="player1Name" placeholder="first player" />
+      <input type="text" id="player1Name" placeholder="먼저 하실 분" />
     </div>
     <div class="player-input">
-      <input type="text" id="player2Name" placeholder="second player" />
+      <input type="text" id="player2Name" placeholder="나중에 하실 분" />
     </div>
     <button id="startBtn" class="game-button">게임 시작</button>
   </div>
@@ -280,7 +280,7 @@ p {
 
   <div class="guess-section">
     <input type="text" id="guessInput" placeholder="your guess" />
-    <button id="guessBtn" class="game-button">SUBMIT</button>
+    <button id="guessBtn" class="game-button">제출</button>
   </div>
 
   <div id="wrongGuesses" style="display: none;">
@@ -586,15 +586,15 @@ function placeClovers(count) {
       let p1 = foundBy.player1.length, p2 = foundBy.player2.length;
       if (p1 > p2) {
         
-        currentTurnEl.innerHTML = ` GAME OVER`;
+        currentTurnEl.innerHTML = ` 게임 종료`;
         currentTurnEl.style.background = '';
       } else if (p2 > p1) {
         player2ScoreEl.innerHTML += "";
         player1ScoreEl.innerHTML += "";
-        currentTurnEl.innerHTML = `GAME OVER `;
+        currentTurnEl.innerHTML = `게임 종료 `;
         currentTurnEl.style.background = '';
       } else {
-        currentTurnEl.innerHTML = ` GAME OVER`;
+        currentTurnEl.innerHTML = ` 게임 종료`;
         currentTurnEl.style.background = '';
       }
     }
