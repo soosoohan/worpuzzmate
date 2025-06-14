@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>워퍼즈메이트</title>
+  <title>worpuzzmate</title>
 <style>
  
 /* 전체 배경과 기본 텍스트 */
@@ -161,7 +161,7 @@ p {
 
 .game-button {
   font-size: 18px;
-  background-color: #c8f4ee; /* 차분한 녹색계열 */
+  background-color: #c8f4ee; 
   padding: 10px 22px;
   margin: 8px;
   color: #064d4d;
@@ -173,11 +173,9 @@ p {
 }
 
 .game-button:hover {
-  background-color: #1d9e95; /* 약간 더 짙은 톤 */
+  background-color: #1d9e95; 
   transform: scale(1.05);
 }
-
-
 
 
 /* 격자 */
@@ -257,6 +255,8 @@ p {
 </style>
 
 
+
+
 </head>
 <body>
 
@@ -268,10 +268,10 @@ p {
 
   <div class="player-name-row">
     <div class="player-input">
-      <input type="text" id="player1Name" placeholder="먼저 하실 분" />
+      <input type="text" id="player1Name" placeholder="first player" />
     </div>
     <div class="player-input">
-      <input type="text" id="player2Name" placeholder="나중에 하실 분" />
+      <input type="text" id="player2Name" placeholder="second player" />
     </div>
     <button id="startBtn" class="game-button">게임 시작</button>
   </div>
@@ -279,12 +279,12 @@ p {
   <div id="currentTurn"></div>
 
   <div class="guess-section">
-    <input type="text" id="guessInput" placeholder="추측한 단어를 입력하세요" />
-    <button id="guessBtn" class="game-button">제출</button>
+    <input type="text" id="guessInput" placeholder="your guess" />
+    <button id="guessBtn" class="game-button">SUBMIT</button>
   </div>
 
   <div id="wrongGuesses" style="display: none;">
-    <strong>없는 단어:</strong> <span id="wrongList"></span>
+    <strong>Invalid words:</strong> <span id="wrongList"></span>
   </div>
 
   <div class="game-area">
@@ -294,13 +294,14 @@ p {
   </div>
 
   <div class="controls">
-    <button id="retryBtn" class="game-button">다시하기</button>
-    <button onclick="location.href='index.html'" class="game-button">초기화면</button>
+    <button id="retryBtn" class="game-button">RETRY</button>
+    <button onclick="location.href='index.html'" class="game-button">HOME</button>
   </div>
 </div>
 
 <script>
 window.onload = () => {
+  // 1. URL 파라미터에서 워드풀 파일명 추출
   const urlParams = new URLSearchParams(window.location.search);
   const poolFile = urlParams.get('pool');
   if (!poolFile) {
@@ -308,12 +309,36 @@ window.onload = () => {
     return;
   }
 
+  // 2. 워드풀 JSON 파일 불러오기
+  fetch('/worpuzzmate/wordpools/' + poolFile)
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('game-title').textContent = data.title || '게임 제목';
+      document.getElementById('game-desc').textContent = data.description || '게임 설명';
+
+      // 3. 워드 배열(words) 구성
+      words = [];
+      for (let length in data.words) {
+        const count = data.wordCount[length] || 0;
+        const selected = getRandomSample(data.words[length], count);
+        words.push(...selected);
+      }
+
+      // 4. 게임 초기화 실행
+      init();
+    })
+    .catch(err => {
+      document.body.innerHTML = '<p>❌ 워드풀 로딩 중 오류 발생: ' + err.message + '</p>';
+    });
+
+  // 5. 전역 변수 선언
   const gridSize = 10;
   const totalCells = gridSize * gridSize;
   let board, revealed, wordMap, foundWords, currentPlayer, foundBy, words, usedIndexes;
   let clovers = new Set(), daisies = new Set(), resultShown = false;
   let player1 = "플레이어1", player2 = "플레이어2", currentPlayerName = "", wrongGuesses = [];
 
+  // 6. DOM 요소 불러오기
   const gameEl = document.getElementById('game');
   const player1ScoreEl = document.getElementById('player1Score');
   const player2ScoreEl = document.getElementById('player2Score');
@@ -325,6 +350,8 @@ window.onload = () => {
   const wrongListEl = document.getElementById('wrongList');
   const wrongGuessesEl = document.getElementById('wrongGuesses');
 
+
+    
   function shuffle(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -359,6 +386,8 @@ window.onload = () => {
       document.body.innerHTML = '<p>❌ 워드풀 로딩 중 오류 발생: ' + err.message + '</p>';
     });
 
+
+
   function init() {
     board = Array(totalCells).fill(null);
     revealed = Array(totalCells).fill(false);
@@ -391,7 +420,6 @@ window.onload = () => {
     updateScore();
     updateTurnDisplay();
   }
-
 
   function canPlaceWord(word, x, y, dx, dy) {
     for (let i = 0; i < word.length; i++) {
@@ -485,7 +513,7 @@ function placeClovers(count) {
 
 
   function fillEmptyCells() {
-    const filler = '가각간값같갛개거건걸검것게곁고골공괴교구국궁그근글금기긴길까깜깨꺾껴꼼꽁꾸끔나난날낮낯내넘넣네년놀놈누눈뉴는니님다닥달담대댄더던덩데도동두드득든듣들등디딜딱때땡똑뚫뛰라락란람랐랑래랜러레려력렸로롭르른를리린림마막만말맘맛맞매맨머먹먼멀멋메멘며면모목몰무문묻물뭘미민밀바박반받발밤밥방뱅버벅번법벼별보복볼봐봤부북분불붙브블비빈빌빔빛빠빡빨빼뻥뿔사살상새색생서선섬섭섰세셋소속솜수숙순숲쉬슴시신실싶쌍쓰씌씻아악안알았앞애야양어얼엄업없었엉에여열영옛오온올옴옷옹와왔왜우운울원위유윤으은을음의이익인일잃임입있잊자작잖잘장재저적전정제져졸좀좋주줄중줬지진집짜짝찍차착참창채책척천청체쳤초촌출췄취치친카켜코콜크큰테토트튼파판폭폼핀필하학한할해햄했행현형호혼화환히힘'.split('');
+    const filler = 'QWERTYUIOPASDFGHJKLZXCVBNM'.split('');
     
     shuffle(filler);
     let iFiller = 0;
@@ -558,15 +586,15 @@ function placeClovers(count) {
       let p1 = foundBy.player1.length, p2 = foundBy.player2.length;
       if (p1 > p2) {
         
-        currentTurnEl.innerHTML = ` 게임 종료`;
+        currentTurnEl.innerHTML = ` GAME OVER`;
         currentTurnEl.style.background = '';
       } else if (p2 > p1) {
         player2ScoreEl.innerHTML += "";
         player1ScoreEl.innerHTML += "";
-        currentTurnEl.innerHTML = `게임 종료 `;
+        currentTurnEl.innerHTML = `GAME OVER `;
         currentTurnEl.style.background = '';
       } else {
-        currentTurnEl.innerHTML = ` 게임 종료`;
+        currentTurnEl.innerHTML = ` GAME OVER`;
         currentTurnEl.style.background = '';
       }
     }
@@ -615,6 +643,7 @@ function placeClovers(count) {
       switchTurn(false);
     }
   }
+
 
 
   startBtn.onclick = init;
