@@ -30,23 +30,38 @@ Inspired by Minesweeper, it challenges players to uncover hidden words on a tile
 - 🌼 **데이지(Daisy)**를 클릭하면 주변 8칸이 열리고 **추가 턴**이 주어집니다.  
   🌼 Clicking a daisy reveals 8 surrounding tiles and grants an **extra turn**.
 
-
-## 👤 만든 사람 | Credits
+---
+### 👤 만든 사람 | Credits
 
 - 제작 | Developed by: **한수수 (Soosoo Han)**  
-- 코딩 지원 | Coding Support: **ChatGPT**
-
+- 코딩 지원 | Coding Support: **ChatGPT , 재치,  Claude**
 ⓒ 2025 한수수.  
 이 게임의 모든 권리는 제작자에게 있으며,  
 **무단 복제, 배포, 2차 창작을 금지합니다.**
-
 © 2025 Soosoo Han.  
-All rights reserved. Do not copy, distribute, or modify without permission.
+All rights reserved.  
+**Do not copy, distribute, or create derivative works without permission.**
 
 ---
 
-## 🧪 플레이 방법 | How to Play
+### 🧪 한수수의 다른 게임들 | Other Games by Soosoo Han
 
-> 📍 [게임 시작하기 | Start the Game](https://soosoohan.github.io/worpuzzmate)  
-> 워드풀을 선택하고 이름을 입력한 뒤 게임을 시작하세요!  
-> Choose a word pool and enter player names to begin!
+- **워퍼즈 (Worpuzz)**  
+  격자 속에 숨어있는 단어를 찾으며 어휘력을 키우는 게임  
+  *Find hidden words in the grid and build your vocabulary*  
+  👉 http://soosoohan.github.io/worpuzz
+
+- **넘즐 (Numzzle)**  
+  수학을 재미있게! 목표 숫자에 가까운 수식을 만드는 게임  
+  *Make math fun! Create formulas to match the target number*  
+  👉 http://soosoohan.github.io/numzzle
+
+- **트링클 (Trinkle)**  
+  별을 잇고 삼각형을 그리는 우주 땅따먹기 전략 게임  
+  *Connect stars to draw triangles in this cosmic strategy game*  
+  👉 http://soosoohan.github.io/trinkle
+
+- **워퍼즈메이트 (Worpuzz Mate)**  
+  격자를 열거나 단어를 추측하며 겨루는 어휘력 대결 게임  
+  *Compete to guess or uncover words hidden in the grid*  
+  👉 http://soosoohan.github.io/worpuzzmate
