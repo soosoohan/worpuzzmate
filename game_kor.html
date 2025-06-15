@@ -130,12 +130,12 @@
 <div class="game-container">
 
   <div class="player-name-row">
-    <div class="player-input"><input type="text" id="player1Name" placeholder="먼저 하실 분 " /></div>
-    <div class="player-input"><input type="text" id="player2Name" placeholder="나중에 하실 분" /></div>
+    <div class="player-input"><input type="text" id="player1Name" placeholder="first player" /></div>
+    <div class="player-input"><input type="text" id="player2Name" placeholder="second player" /></div>
   </div>
 
   <div class="start-section">
-    <button id="startBtn" class="game-button">게임 시작</button>
+    <button id="startBtn" class="game-button">START GAME</button>
   </div>
 
   <div id="gameSection" class="hidden">
@@ -143,12 +143,12 @@
 
 ```
 <div class="guess-section">
-  <input type="text" id="guessInput" placeholder="추측한 단어" />
-  <button id="guessBtn" class="game-button">제출</button>
+  <input type="text" id="guessInput" placeholder="your guess" />
+  <button id="guessBtn" class="game-button">SUBMIT</button>
 </div>
 
 <div id="wrongGuesses" style="display: none;">
-  <strong>없는 단어:</strong> <span id="wrongList"></span>
+  <strong>Invalid words:</strong> <span id="wrongList"></span>
 </div>
 
 <div class="game-area">
@@ -158,10 +158,10 @@
 </div>
 
 <div class="controls">
-  <button id="retryBtn" class="game-button">다시 하기</button>
-  <button onclick="location.href='index.html'" class="game-button">초기 화면</button>
+  <button id="retryBtn" class="game-button">RETRY</button>
+  <button onclick="location.href='index.html'" class="game-button">HOME</button>
 </div>
-
+```
 
   </div>
 
@@ -307,8 +307,8 @@ window.onload = () => {
     const directions = [
       { x: 1, y: 0 },   // 가로
       { x: 0, y: 1 },   // 세로
-      { x: 1, y: 1 }   // 대각선 \
-     
+      { x: 1, y: 1 },   // 대각선 \
+      { x: 1, y: -1 }   // 대각선 /
     ];
     
     for (let dir of directions) {
@@ -484,23 +484,28 @@ window.onload = () => {
       }
     }
   }
-//수수
-  
-function checkGameEnd() {
-  const totalWords = Object.keys(wordMap).length;
-  if (foundWords.size >= totalWords && totalWords > 0) {
-    resultShown = true;
+
+  function checkGameEnd() {
+    const totalWords = Object.keys(wordMap).length;
+    if (foundWords.size >= totalWords && totalWords > 0) {
+      resultShown = true;
+      const p1Count = foundBy.player1.length;
+      const p2Count = foundBy.player2.length;
+      
+      let winner;
+      if (p1Count > p2Count) winner = player1;
+      else if (p2Count > p1Count) winner = player2;
+      else winner = "무승부";
+      
+      setTimeout(() => {
+        alert(`게임 종료!\n${winner === "무승부" ? "무승부입니다!" : winner + "님이 승리했습니다!"}\n\n${player1}: ${p1Count}개\n${player2}: ${p2Count}개`);
+      }, 500);
+    }
+  }
+
+  function handleGuess() {
+    if (!gameStarted) return;
     
-    setTimeout(() => {
-      alert("게임 종료!");
-    }, 500);
-  }
-} 
-function handleGuess() {
-  if (!gameStarted) return;
-  }
-
-
     const guess = guessInput.value.trim();
     guessInput.value = "";
     if (!guess || foundWords.has(guess)) return;
