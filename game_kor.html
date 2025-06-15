@@ -111,7 +111,7 @@
     }
     #game {
       display: grid;
-      grid-template-columns: repeat(12, 50px);
+      grid-template-columns: repeat(10, 50px);
       grid-gap: 5px;
       padding: 10px;
       border: 2px solid #333;
@@ -141,7 +141,6 @@
   <div id="gameSection" class="hidden">
     <div id="currentTurn"></div>
 
-```
 <div class="guess-section">
   <input type="text" id="guessInput" placeholder="your guess" />
   <button id="guessBtn" class="game-button">SUBMIT</button>
@@ -161,7 +160,6 @@
   <button id="retryBtn" class="game-button">RETRY</button>
   <button onclick="location.href='index.html'" class="game-button">HOME</button>
 </div>
-```
 
   </div>
 
@@ -193,7 +191,7 @@ window.onload = () => {
       document.body.innerHTML = '<p>❌ 워드풀 로딩 중 오류 발생: ' + err.message + '</p>';
     });
 
-  const gridSize = 12;
+  const gridSize = 10;
   const totalCells = gridSize * gridSize;
   let board, revealed, wordMap, foundWords, currentPlayer, foundBy, words, usedIndexes;
   let clovers = new Set(), daisies = new Set(), resultShown = false, gameStarted = false;
@@ -307,8 +305,8 @@ window.onload = () => {
     const directions = [
       { x: 1, y: 0 },   // 가로
       { x: 0, y: 1 },   // 세로
-      { x: 1, y: 1 },   // 대각선 \
-      { x: 1, y: -1 }   // 대각선 /
+      { x: 1, y: 1 }   // 대각선 
+      
     ];
     
     for (let dir of directions) {
