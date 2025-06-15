@@ -446,7 +446,7 @@ window.onload = () => {
   function updateTurnDisplay() {
     if (!gameStarted) return;
     currentPlayerName = currentPlayer === 'player1' ? player1 : player2;
-    currentTurnEl.textContent = `${currentPlayerName}님의 차례입니다`;
+    currentTurnEl.textContent = `It is ${currentPlayerName}'s turn.`;
   }
 
   function switchTurn(extra) {
