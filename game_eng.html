@@ -180,11 +180,8 @@ window.onload = () => {
     .then(res => res.json())
     .then(data => {
       document.getElementById('game-title').textContent = data.title || '게임 제목';
-const rawText = data.description || '게임 설명';
-const htmlText = rawText.replace(/\n/g, '<br>');
-      
-
-document.getElementById('game-desc').textContent = data.description || '게임 설명';
+      document.getElementById('game-desc').textContent = data.description || '게임 설명';
+ 
 
 words = [];
       for (let length in data.words) {
