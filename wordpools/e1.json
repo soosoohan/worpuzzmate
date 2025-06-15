@@ -1,9 +1,9 @@
 
-
 {
-  "title": "A1 Oxford Beginner",
+"__comment": "e1",
+  "title": "WORPUZZMATE A1 Oxford Beginner",
 
-"description": "Find the words hidden in the grid. Find the words hidden horizontally, vertically, and diagonally in the grid!\nEnter your guessed word (UPPERCASE). Enter your name or nickname and press the Start button to begin the game.",
+"description": "Find the words hidden in the grid. Find the words hidden horizontally, vertically, and diagonally in the grid!\nEnter your guessed word (UPPERCASE).\nEnter your name or nickname and press the Start button to begin the game.",
 
   "words": {
     "4": [
@@ -21,11 +21,11 @@
 ]
   },
   "wordCount": {
-    "4": 2,
-    "5": 3,
-    "6": 3,
+    "4": 1,
+    "5": 2,
+    "6": 2,
     "7": 2,
-    "8": 1,
-    "9": 1
+    "8": 2,
+    "9": 2
   }
 }
