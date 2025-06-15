@@ -3,7 +3,7 @@
 "__comment": "e7",  
 "title": "WORPUZZMATE ORGANISM",
 
-"description": "Find the words hidden in the grid. Find the words hidden horizontally, vertically, and diagonally in the grid!\nEnter your guessed word (UPPERCASE).\nEnter your name or nickname and press the Start button to begin the game.",
+"description": "Find the words hidden in the grid. Find the words hidden horizontally, vertically and diagonally in the grid!\nEnter your guessed word (UPPERCASE).\nEnter your name or nickname and press the Start button to begin the game.",
 
   "words": {
     "4": ["ASH","CAT","COD","COW","DOG","EEL","ELK","ELM","EMU","EWE","FIG","FIR","FOX","HEN","HOG","IVY","OAK","OWL","PIG","RAM","SOW","YAK","YAM","YEW","ALOE","BEAR","BEET","BOAR","BULL","CALF","CARP","CLAM","CRAB","CROW","DATE","DEER","DILL","DODO","DUCK","FERN","FOAL","FROG","GOAT","HARE","HAWK","IRIS","KALE","KELP","KIWI","LAMB","LARK","LEEK","LILY","LIME","LION","MARE","MINT","MOLE","MOSS","MULE","NEWT","ORCA","PALM","PEAR","PINE","PLUM","PONY","PUMA","REED","ROSE","SAGE","SEAL","SWAN","TEAK","TOAD","TUNA","VOLE","WOLF"],
