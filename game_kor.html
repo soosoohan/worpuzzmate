@@ -107,7 +107,7 @@
     }
     #game {
       display: grid;
-      grid-template-columns: repeat(10, 50px);
+      grid-template-columns: repeat(12, 50px);
       grid-gap: 5px;
       padding: 10px;
       border: 2px solid #333;
@@ -176,7 +176,7 @@ window.onload = () => {
       document.body.innerHTML = '<p>❌ 워드풀 로딩 중 오류 발생: ' + err.message + '</p>';
     });
 
-  const gridSize = 10;
+  const gridSize = 12;
   const totalCells = gridSize * gridSize;
   let board, revealed, wordMap, foundWords, currentPlayer, foundBy, words, usedIndexes;
   let clovers = new Set(), daisies = new Set(), resultShown = false;
