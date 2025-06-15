@@ -1,10 +1,10 @@
 
 
-
 {
   "title": "A1 Oxford Beginner",
-  "description": "Find the words hidden in the grid.Find the words hidden horizontally, vertically, and diagonally in the grid!
-  Enter your guessed word (UPPERCASE).Enter your name or nickname and press the Start button to begin the game.",
+
+"description": "Find the words hidden in the grid. Find the words hidden horizontally, vertically, and diagonally in the grid!\nEnter your guessed word (UPPERCASE). Enter your name or nickname and press the Start button to begin the game.",
+
   "words": {
     "4": [
 "ADD","AGE","AGO","AIR","ALL","AND","ANY","ARM","ART","ASK","BAD","BAG","BED","BIG","BOX","BOY","BUS","BUT","BUY","BYE","CAN","CAR","CAT","COW","CUP","CUT","DAD","DAY","DIE","DOG","DVD","EAR","EAT","EGG","END","EYE","FAR","FAT","FEW","FLY","FOR","FUN","GET","GYM","HAT","HER","HEY","HIM","HIS","HOT","HOW","ICE","ITS","JOB","KEY","LEG","LET","LIE","LOT","MAN","MAP","MAY","MUM","NEW","NOT","NOW","OFF","OLD","ONE","OUR","OUT","OWN","PAY","PEN","PIG","PUT","RED","RUN","SAD","SAY","SEA","SEE","SHE","SIT","SIX","SON","SUN","TEA","TEN","THE","TOO","TRY","TWO","USE","WAY","WHO","WHY","WIN","YES","YOU","ALSO","AREA","AUNT","AWAY","BABY","BACK","BALL","BAND","BANK","BATH","BEER","BEST","BIKE","BILL","BIRD","BLOG","BLUE","BOAT","BODY","BOOK","BOOT","BORN","BOTH","BUSY","CAFE","CAKE","CALL","CARD","CENT","CITY","CLUB","COAT","COLD","COME","COOK","COOL","COST","DARK","DATE","DEAR","DESK","DIET","DISH","DOOR","DOWN","DRAW","EACH","EAST","EASY","ELSE","EURO","EVEN","EVER","EXAM","FACE","FACT","FALL","FARM","FAST","FEEL","FILL","FILM","FIND","FINE","FIRE","FISH","FIVE","FLAT","FOOD","FOOT","FORM","FOUR","FREE","FROM","FULL","GAME","GIRL","GIVE","GOOD","GREY","GROW","HAIR","HALF","HAND","HARD","HATE","HAVE","HEAD","HEAR","HELP","HERE","HIGH","HOME","HOPE","HOUR","IDEA","INTO","JOIN","JULY","JUNE","JUST","KEEP","KIND","KNOW","LAND","LAST","LATE","LEFT","LIFE","LIKE","LINE","LION","LIST","LIVE","LONG","LOOK","LOSE","LOVE","MAIN","MAKE","MANY","MEAL","MEAN","MEAT","MEET","MENU","MILE","MILK","MISS","MORE","MOST","MOVE","MUCH","MUST","NAME","NEAR","NEED","NEWS","NEXT","NICE","NINE","NOSE","NOTE","ONCE","ONLY","OPEN","OVER","PAGE","PAIR","PARK","PART","PAST","PINK","PLAN","PLAY","POOL","POOR","POST","RAIN","READ","REAL","RICE","RICH","RIDE","ROAD","ROOM","RULE","SALT","SAME","SELL","SEND","SHOE","SHOP","SHOW","SICK","SING","SLOW","SNOW","SOME","SONG","SOON","SOUP","STAR","STAY","STOP","SURE","SWIM","TAKE","TALK","TALL","TAXI","TEAM","TELL","TEST","TEXT","THAN","THAT","THEM","THEN","THEY","THIS","TIME","TOWN","TREE","TRIP","TRUE","TURN","TYPE","VERY","WAIT","WAKE","WALK","WALL","WANT","WARM","WASH","WEAR","WEEK","WELL","WEST","WHAT","WHEN","WIFE","WILL","WINE","WITH","WORD","WORK","YEAH","YEAR","YOUR"],
