@@ -146,9 +146,10 @@
   </p>
 </div>
 
+
+
 <script>
   function startGame(poolName, isEnglish) {
-    document.body.innerHTML = '';  // 👉 추가
     const page = isEnglish ? 'game_eng.html' : 'game_kor.html';
     location.href = `${page}?pool=${poolName}`;
   }
