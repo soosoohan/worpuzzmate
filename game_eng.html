@@ -286,7 +286,7 @@ window.onload = () => {
       }
       console.log('실제 배치된 단어 수:', placedWords.length);
     }
-    
+
     // 클로버/데이지 배치 (단어 영역 피하기)
     placeDaisies(3);
     placeClovers(7);
@@ -404,39 +404,83 @@ if (canPlaceWord(word, x, y, dir.x, dir.y)) {
     return false; // 실패
   }
 
-  function placeClovers(count) {
-    let placed = 0;
-    let attempts = 0;
-    while (placed < count && attempts < 1000) {
-      const idx = Math.floor(Math.random() * totalCells);
-      if (!usedIndexes.has(idx) && !clovers.has(idx) && !daisies.has(idx)) {
-        // 주변에 단어가 없는지 확인
-        if (isSafeForSpecial(idx)) {
-          clovers.add(idx);
-          placed++;
-        }
-      }
-      attempts++;
-    }
-    console.log('배치된 클로버 수:', clovers.size);
-  }
 
-  function placeDaisies(count) {
-    let placed = 0;
-    let attempts = 0;
-    while (placed < count && attempts < 1000) {
-      const idx = Math.floor(Math.random() * totalCells);
-      if (!usedIndexes.has(idx) && !clovers.has(idx) && !daisies.has(idx)) {
-        // 주변에 단어가 없는지 확인
-        if (isSafeForSpecial(idx)) {
-          daisies.add(idx);
-          placed++;
+function getRandomSpreadPositions(gridSize, count) {
+  const positions = [];
+  const cellsPerFlower = Math.floor((gridSize * gridSize) / count);
+  
+  for (let i = 0; i < count; i++) {
+    const targetIdx = i * cellsPerFlower + Math.floor(Math.random() * cellsPerFlower/2);
+    const x = targetIdx % gridSize;
+    const y = Math.floor(targetIdx / gridSize);
+    
+    const safeX = Math.min(x, gridSize - 1);
+    const safeY = Math.min(y, gridSize - 1);
+    
+    positions.push({ x: safeX, y: safeY });
+  }
+  
+  return positions;
+}
+
+function placeDaisies(count) {
+  const targetPositions = getRandomSpreadPositions(gridSize, count);
+  let placed = 0;
+  
+  for (let pos of targetPositions) {
+    if (placed >= count) break;
+    
+    // 목표 위치 근처에서 빈 자리 찾기
+    for (let radius = 0; radius < 3 && placed < count; radius++) {
+      for (let dy = -radius; dy <= radius && placed < count; dy++) {
+        for (let dx = -radius; dx <= radius && placed < count; dx++) {
+          const x = pos.x + dx;
+          const y = pos.y + dy;
+          
+          if (x >= 0 && x < gridSize && y >= 0 && y < gridSize) {
+            const idx = y * gridSize + x;
+            if (!usedIndexes.has(idx) && !clovers.has(idx) && !daisies.has(idx)) {
+              if (isSafeForSpecial(idx)) {
+                daisies.add(idx);
+                placed++;
+              }
+            }
+          }
         }
       }
-      attempts++;
     }
-    console.log('배치된 데이지 수:', daisies.size);
   }
+  console.log('배치된 데이지 수:', daisies.size);
+}
+
+function placeClovers(count) {
+  const targetPositions = getRandomSpreadPositions(gridSize, count);
+  let placed = 0;
+  
+  for (let pos of targetPositions) {
+    if (placed >= count) break;
+    
+    for (let radius = 0; radius < 3 && placed < count; radius++) {
+      for (let dy = -radius; dy <= radius && placed < count; dy++) {
+        for (let dx = -radius; dx <= radius && placed < count; dx++) {
+          const x = pos.x + dx;
+          const y = pos.y + dy;
+          
+          if (x >= 0 && x < gridSize && y >= 0 && y < gridSize) {
+            const idx = y * gridSize + x;
+            if (!usedIndexes.has(idx) && !clovers.has(idx) && !daisies.has(idx)) {
+              if (isSafeForSpecial(idx)) {
+                clovers.add(idx);
+                placed++;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  console.log('배치된 클로버 수:', clovers.size);
+}
 
   function isSafeForSpecial(idx) {
     const x = idx % gridSize;
@@ -454,9 +498,9 @@ if (canPlaceWord(word, x, y, dir.x, dir.y)) {
       }
     }
     return true;
-  }
+  } 
 
-  function fillEmptyCells() {
+function fillEmptyCells() {
     const filler = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
     shuffle(filler);
     let i = 0;
@@ -519,7 +563,7 @@ if (canPlaceWord(word, x, y, dir.x, dir.y)) {
   function updateTurnDisplay() {
     if (!gameStarted) return;
     currentPlayerName = currentPlayer === 'player1' ? player1 : player2;
-    currentTurnEl.textContent = `It is ${currentPlayerName}'s turn.`;
+    currentTurnEl.textContent = `It is ${currentPlayerName}'turn.`;
   }
 
   function switchTurn(extra) {
