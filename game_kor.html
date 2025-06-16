@@ -320,9 +320,12 @@ window.onload = () => {
     // 방향을 무작위로 섞어서 더 다양한 배치
     const shuffledDirections = directions.sort(() => Math.random() - 0.5);
     
+
     for (let dir of shuffledDirections) {
-      for (let y = 0; y < gridSize; y++) {
-        for (let x = 0; x < gridSize; x++) {
+const startY = Math.floor(Math.random() * gridSize);
+for (let i = 0; i < gridSize; i++) {
+  const y = (startY + i) % gridSize;
+  for (let x = 0; x < gridSize; x++) {
           if (canPlaceWord(word, x, y, dir.x, dir.y)) {
             let positions = [];
             for (let i = 0; i < word.length; i++) {
