@@ -141,7 +141,7 @@
   <div id="gameSection" class="hidden">
     <div id="currentTurn"></div>
 
-```
+
 <div class="guess-section">
   <input type="text" id="guessInput" placeholder="추측한 단어" />
   <button id="guessBtn" class="game-button">제출</button>
@@ -158,10 +158,10 @@
 </div>
 
 <div class="controls">
-  <button id="retryBtn" class="game-button">다시하기</button>
-  <button onclick="location.href='index.html'" class="game-button">초기화면</button>
+  <button id="retryBtn" class="game-button">다시 하기</button>
+  <button onclick="location.href='index.html'" class="game-button">초기 화면</button>
 </div>
-```
+
 
   </div>
 
@@ -212,7 +212,7 @@ window.onload = () => {
   const wrongGuessesEl = document.getElementById('wrongGuesses');
 
   function shuffle(arr) {
-    for (let i = arr.length - 1; i > 0; i--; ) {
+    for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
@@ -281,8 +281,8 @@ window.onload = () => {
     console.log('배치된 단어들:', placedWords);
     
     // 클로버/데이지 배치 (단어 영역 피하기)
-    placeDaisies(2);
-    placeClovers(5);
+    placeDaisies(3);
+    placeClovers(7);
     fillEmptyCells();
     updateScore();
     updateTurnDisplay();
@@ -384,7 +384,7 @@ window.onload = () => {
   }
 
   function fillEmptyCells() {
-    const filler = ''같갛개거건걸것게고괴교국궁그근금기긴까깜깨꺾껴꼼꽁꾸끔난내넘넣네놀놈누뉴는니님다닥대댄더던덩데도동두드득든듣들등디딜딱때땡똑뚫뛰라락란람랐랑래랜러레려력렸로롭르른를리린림마만맛맞맨머먼멀메멘며몰무묻뭘미민바받방버벅번봐봤부붙브블비빈빌빔빠빡빨빼뻥사새생서섭섰세숙쉬슴실싶쌍쓰씌씻아악알았애야어엄업없었엉에여열옛오온올와왔왜우울원위유윤으을음의익인잃있잊작잖잘저전제져좋주줬짜짝찍차착참창채척천청체쳤초출췄취치친카켜코콜크테토트튼폭핀하학한할해햄했행현호혼화환히'.split('');
+    const filler = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
     shuffle(filler);
     let i = 0;
     for (let j = 0; j < totalCells; j++) {
@@ -485,20 +485,22 @@ window.onload = () => {
     }
   }
 
-  function checkGameEnd() {
-    const totalWords = Object.keys(wordMap).length;
-    if (foundWords.size >= totalWords && totalWords > 0) {
-      resultShown = true;
-      
-      setTimeout(() => {
-        alert("게임 종료!");
-      }, 500);
-    }
+  
+function checkGameEnd() {
+  const totalWords = Object.keys(wordMap).length;
+  if (foundWords.size >= totalWords && totalWords > 0) {
+    resultShown = true;
+    
+    setTimeout(() => {
+      alert("게임 종료!");
+    }, 500);
+  }
+} 
+function handleGuess() {
+  if (!gameStarted) return;
   }
 
-  function handleGuess() {
-    if (!gameStarted) return;
-    
+
     const guess = guessInput.value.trim();
     guessInput.value = "";
     if (!guess || foundWords.has(guess)) return;
