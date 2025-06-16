@@ -411,7 +411,9 @@ if (canPlaceWord(word, x, y, dir.x, dir.y)) {
       const idx = Math.floor(Math.random() * totalCells);
       if (!usedIndexes.has(idx) && !clovers.has(idx) && !daisies.has(idx)) {
         // 주변에 단어가 없는지 확인
-        if (isSafeForSpecial(idx)) {
+        
+
+if (isSafeForSpecial(idx)) {
           clovers.add(idx);
           placed++;
         }
@@ -437,24 +439,27 @@ if (canPlaceWord(word, x, y, dir.x, dir.y)) {
     }
     console.log('배치된 데이지 수:', daisies.size);
   }
-
-  function isSafeForSpecial(idx) {
-    const x = idx % gridSize;
-    const y = Math.floor(idx / gridSize);
-    
-    // 주변 8칸 확인
-    for (let dy = -1; dy <= 1; dy++) {
-      for (let dx = -1; dx <= 1; dx++) {
-        const nx = x + dx;
-        const ny = y + dy;
-        if (nx >= 0 && nx < gridSize && ny >= 0 && ny < gridSize) {
-          const nIdx = ny * gridSize + nx;
-          if (usedIndexes.has(nIdx)) return false;
+function isSafeForSpecial(idx) {
+  const x = idx % gridSize;
+  const y = Math.floor(idx / gridSize);
+  
+  // 주변 8칸에 다른 아이템이 있는지만 확인 (단어는 상관없음)
+  for (let dy = -1; dy <= 1; dy++) {
+    for (let dx = -1; dx <= 1; dx++) {
+      if (dx === 0 && dy === 0) continue;
+      const nx = x + dx;
+      const ny = y + dy;
+      if (nx >= 0 && nx < gridSize && ny >= 0 && ny < gridSize) {
+        const nIdx = ny * gridSize + nx;
+        if (clovers.has(nIdx) || daisies.has(nIdx)) {
+          return false;
         }
       }
     }
-    return true;
   }
+  return true;
+}
+
 
   function fillEmptyCells() {
     const filler = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
