@@ -136,12 +136,11 @@
   </div>
 
   <div class="start-section">
-    <button id="startBtn" class="game-button">START</button>
+    <button id="startBtn" class="game-button">START GAME</button>
   </div>
 
   <div id="gameSection" class="hidden">
     <div id="currentTurn"></div>
-
 
 <div class="guess-section">
   <input type="text" id="guessInput" placeholder="your guess" />
@@ -163,18 +162,17 @@
   <button onclick="location.href='index.html'" class="game-button">HOME</button>
 </div>
 
-
   </div>
 
 </div>
 <script>
 window.onload = () => {
-const urlParams = new URLSearchParams(window.location.search);
-const poolFile = urlParams.get(‘pool’);
-if (!poolFile) {
-document.body.innerHTML = ‘<p>❌ 워드풀 파일이 지정되지 않았습니다.</p>’;
-return;
-}
+  const urlParams = new URLSearchParams(window.location.search);
+  const poolFile = urlParams.get('pool');
+  if (!poolFile) {
+    document.body.innerHTML = '<p>❌ 워드풀 파일이 지정되지 않았습니다.</p>';
+    return;
+  }
 
 fetch(‘wordpools/’ + poolFile + ‘.json’)
 .then(res => res.json())
@@ -182,9 +180,9 @@ fetch(‘wordpools/’ + poolFile + ‘.json’)
 document.getElementById(‘game-title’).textContent = data.title || ‘게임 제목’;
 const rawText = data.description || ‘게임 설명’;
 const htmlText = rawText.replace(/\n/g, ‘<br>’);
-document.getElementById(‘game-desc’).innerHTML = htmlText;
+document.getElementById(‘game-desc’).innerHTML = htmlText; // innerHTML로 변경
 
-
+      
   words = [];
   for (let length in data.words) {
     const count = data.wordCount[length] || 0;
@@ -196,9 +194,9 @@ document.getElementById(‘game-desc’).innerHTML = htmlText;
 .catch(err => {
   document.body.innerHTML = '<p>❌ 워드풀 로딩 중 오류 발생: ' + err.message + '</p>';
 });
+      
 
-
-const gridSize = 12; 
+const gridSize = 12;
 const totalCells = gridSize * gridSize;
 let board, revealed, wordMap, foundWords, currentPlayer, foundBy, words, usedIndexes;
 let clovers = new Set(), daisies = new Set(), resultShown = false, gameStarted = false;
@@ -241,7 +239,6 @@ gameStarted = true;
 
 init();
 
-
 }
 
 function init() {
@@ -259,7 +256,7 @@ wrongListEl.textContent = “”;
 wrongGuessesEl.style.display = ‘none’;
 resultShown = false;
 
-
+      
 gameEl.innerHTML = '';
 for (let i = 0; i < totalCells; i++) {
   const cell = document.createElement('div');
@@ -268,35 +265,41 @@ for (let i = 0; i < totalCells; i++) {
   gameEl.appendChild(cell);
 }
 
-// 단어 배치
-let placedWords = [];
-shuffle(words);
-
-for (let word of words) {
-  let placed = false;
-  for (let attempt = 0; attempt < 500; attempt++) {
-    if (placeWord(word)) {
-      placedWords.push(word);
-      placed = true;
-      break;
+// 방향 검증과 함께 단어 배치
+if (placeAllWordsWithVariety()) {
+  console.log('모든 단어가 성공적으로 배치되었습니다 (3방향 사용)');
+} else {
+  console.log('방향 검증 실패 - 기본 배치로 진행');
+  // 기본 배치 로직
+  let placedWords = [];
+  shuffle(words);
+  
+  for (let word of words) {
+    let placed = false;
+    for (let attempt = 0; attempt < 500; attempt++) {
+      if (placeWord(word)) {
+        placedWords.push(word);
+        placed = true;
+        break;
+      }
+    }
+    if (!placed) {
+      console.log('배치 실패한 단어:', word);
     }
   }
-  if (!placed) {
-    console.log('배치 실패한 단어:', word);
-  }
+  console.log('실제 배치된 단어 수:', placedWords.length);
 }
 
-console.log('실제 배치된 단어 수:', placedWords.length);
-console.log('배치된 단어들:', placedWords);
-
-// 클로버/데이지 배치 (새로운 분산 방식)
-placeFlowersWithDistance(3, 7, 2);
+// 클로버/데이지 배치 (단어 영역 피하기 + 서로 인접하지 않게)
+placeDaisies(3);
+placeClovers(7);
 fillEmptyCells();
 updateScore();
 updateTurnDisplay();
 
+// 게임 종료 조건 확인
 checkGameEnd();
-
+      
 
 }
 
@@ -305,13 +308,13 @@ for (let i = 0; i < word.length; i++) {
 let nx = x + dx * i, ny = y + dy * i;
 if (nx < 0 || ny < 0 || nx >= gridSize || ny >= gridSize) return false;
 
-
+      
   let idx = ny * gridSize + nx;
   if (board[idx] && board[idx] !== word[i]) return false;
   if (usedIndexes.has(idx)) return false;
 }
 return true;
-
+      
 
 }
 
@@ -322,96 +325,110 @@ const directions = [
 { x: 1, y: 1 },   // 대각선 (오른쪽 아래)
 ];
 
-
+      
 // 방향을 무작위로 섞어서 더 다양한 배치
 const shuffledDirections = directions.sort(() => Math.random() - 0.5);
 
-// 단어 배치 시작점도 무작위로
+for (let dir of shuffledDirections) {
+      
+
 const startY = Math.floor(Math.random() * gridSize);
 for (let i = 0; i < gridSize; i++) {
-  const y = (startY + i) % gridSize;
-  for (let dir of shuffledDirections) {
-    for (let x = 0; x < gridSize; x++) {
-      if (canPlaceWord(word, x, y, dir.x, dir.y)) {
-        let positions = [];
-        for (let j = 0; j < word.length; j++) {
-          let nx = x + dir.x * j, ny = y + dir.y * j, idx = ny * gridSize + nx;
-          board[idx] = word[j];
-          usedIndexes.add(idx);
-          positions.push(idx);
-        }
-        wordMap[word] = positions;
-        return true;
-      }
-    }
-  }
-}
-return false;
+const y = (startY + i) % gridSize;
+for (let x = 0; x < gridSize; x++) {
 
-
+if (canPlaceWord(word, x, y, dir.x, dir.y)) {
+let positions = [];
+for (let i = 0; i < word.length; i++) {
+let nx = x + dir.x * i, ny = y + dir.y * i, idx = ny * gridSize + nx;
+board[idx] = word[i];
+usedIndexes.add(idx);
+positions.push(idx);
 }
-
-// 꽃들 사이의 최소 거리 체크
-function isMinimumDistanceOK(newX, newY, existingFlowers, minDistance) {
-for (let flower of existingFlowers) {
-const distance = Math.abs(newX - flower.x) + Math.abs(newY - flower.y);
-if (distance < minDistance) {
-return false;
-}
-}
+wordMap[word] = {
+positions: positions,
+direction: [dir.x, dir.y] // 방향 정보 저장
+};
 return true;
 }
+}
+}
+}
+return false;
+}
 
-// 데이지와 클로버를 적당한 거리로 분산 배치
-function placeFlowersWithDistance(daisyCount, cloverCount, minDistance = 2) {
-const allFlowers = [];
-daisies.clear();
-clovers.clear();
+function checkDirectionVariety() {
+let directionCount = {
+‘1,0’: 0,    // 가로
+‘0,1’: 0,    // 세로
+‘1,1’: 0     // 대각선
+};
 
+      
+// wordMap에서 각 단어의 방향 체크
+for (let word in wordMap) {
+  const direction = wordMap[word].direction;
+  const key = direction[0] + ',' + direction[1];
+  if (directionCount.hasOwnProperty(key)) {
+    directionCount[key]++;
+  }
+}
 
-// 데이지 먼저 배치
+console.log('방향별 사용 횟수:', directionCount);
+
+// 3방향 모두 사용됐는지 확인
+return directionCount['1,0'] > 0 && directionCount['0,1'] > 0 && directionCount['1,1'] > 0;
+      
+
+}
+
+function placeAllWordsWithVariety() {
 let attempts = 0;
-while (daisies.size < daisyCount && attempts < 1000) {
-  const idx = Math.floor(Math.random() * totalCells);
-  const x = idx % gridSize;
-  const y = Math.floor(idx / gridSize);
+const maxAttempts = 10;
+
+      
+do {
+  // 초기화
+  board = Array(totalCells).fill(null);
+  usedIndexes.clear();
+  wordMap = {};
   
-  if (!usedIndexes.has(idx)) {
-    if (isSafeForSpecial(idx) && isMinimumDistanceOK(x, y, allFlowers, minDistance)) {
-      daisies.add(idx);
-      allFlowers.push({x, y});
+  // 모든 단어 배치 시도
+  let allPlaced = true;
+  const shuffledWords = [...words].sort(() => Math.random() - 0.5);
+  
+  for (let word of shuffledWords) {
+    if (!placeWord(word)) {
+      allPlaced = false;
+      break;
     }
   }
-  attempts++;
-}
-
-// 클로버 배치 (기존 데이지들과 거리 유지)
-attempts = 0;
-while (clovers.size < cloverCount && attempts < 1000) {
-  const idx = Math.floor(Math.random() * totalCells);
-  const x = idx % gridSize;
-  const y = Math.floor(idx / gridSize);
   
-  if (!usedIndexes.has(idx) && !daisies.has(idx)) {
-    if (isSafeForSpecial(idx) && isMinimumDistanceOK(x, y, allFlowers, minDistance)) {
-      clovers.add(idx);
-      allFlowers.push({x, y});
-    }
+  if (allPlaced && checkDirectionVariety()) {
+    console.log(`성공! ${attempts + 1}번째 시도에서 3방향 모두 사용됨`);
+    return true; // 성공
   }
+  
   attempts++;
+  console.log(`${attempts}번째 시도 실패 - 다시 시도`);
+} while (attempts < maxAttempts);
+
+console.log('최대 시도 횟수 초과 - 기본 배치로 진행');
+return false; // 실패
+      
+
 }
 
-console.log('배치된 데이지 수:', daisies.size);
-console.log('배치된 클로버 수:', clovers.size);
-
-}
-
+// 개선된 특수 아이템 배치 함수들
 function isSafeForSpecial(idx) {
 const x = idx % gridSize;
 const y = Math.floor(idx / gridSize);
 
+      
+// 단어가 있는 칸은 피하기
+if (usedIndexes.has(idx)) return false;
 
-// 주변 8칸 확인
+// 주변 8칸에 단어가 있으면 피하기
 for (let dy = -1; dy <= 1; dy++) {
   for (let dx = -1; dx <= 1; dx++) {
     const nx = x + dx;
@@ -423,7 +440,69 @@ for (let dy = -1; dy <= 1; dy++) {
   }
 }
 return true;
+      
 
+}
+
+function isAdjacentToSpecials(idx) {
+const x = idx % gridSize;
+const y = Math.floor(idx / gridSize);
+
+      
+// 주변 8칸에 클로버나 데이지가 있는지 확인
+for (let dy = -1; dy <= 1; dy++) {
+  for (let dx = -1; dx <= 1; dx++) {
+    if (dx === 0 && dy === 0) continue; // 자기 자신은 제외
+    const nx = x + dx;
+    const ny = y + dy;
+    if (nx >= 0 && nx < gridSize && ny >= 0 && ny < gridSize) {
+      const nIdx = ny * gridSize + nx;
+      if (clovers.has(nIdx) || daisies.has(nIdx)) {
+        return true;
+      }
+    }
+  }
+}
+return false;
+      
+
+}
+
+function placeDaisies(count) {
+let placed = 0;
+let attempts = 0;
+while (placed < count && attempts < 2000) { // 시도 횟수 증가
+const idx = Math.floor(Math.random() * totalCells);
+
+      
+  // 기본 안전성 체크 + 다른 특수 아이템과 인접하지 않는지 체크
+  if (isSafeForSpecial(idx) && !isAdjacentToSpecials(idx)) {
+    daisies.add(idx);
+    placed++;
+  }
+  attempts++;
+}
+console.log('배치된 데이지 수:', daisies.size);
+      
+
+}
+
+function placeClovers(count) {
+let placed = 0;
+let attempts = 0;
+while (placed < count && attempts < 2000) { // 시도 횟수 증가
+const idx = Math.floor(Math.random() * totalCells);
+
+      
+  // 기본 안전성 체크 + 다른 특수 아이템과 인접하지 않는지 체크
+  if (isSafeForSpecial(idx) && !isAdjacentToSpecials(idx)) {
+    clovers.add(idx);
+    placed++;
+  }
+  attempts++;
+}
+console.log('배치된 클로버 수:', clovers.size);
+      
 
 }
 
@@ -443,7 +522,7 @@ if (revealed[index]) return;
 revealed[index] = true;
 const cell = gameEl.children[index];
 
-
+      
 if (clovers.has(index)) {
   cell.textContent = '🍀';
   // 상하좌우 4칸 열기
@@ -481,7 +560,7 @@ if (clovers.has(index)) {
   cell.textContent = board[index];
 }
 cell.classList.add('revealed');
-
+      
 
 }
 
@@ -493,7 +572,7 @@ player2ScoreEl.innerHTML = `<strong>${player2}</strong><br><br>` + foundBy.playe
 function updateTurnDisplay() {
 if (!gameStarted) return;
 currentPlayerName = currentPlayer === ‘player1’ ? player1 : player2;
-currentTurnEl.textContent = `${currentPlayerName}님의 차례입니다`;
+currentTurnEl.textContent = `It is ${currentPlayerName}'turn.`;
 }
 
 function switchTurn(extra) {
@@ -506,7 +585,7 @@ updateTurnDisplay();
 function handleClick(index) {
 if (revealed[index] || resultShown || !gameStarted) return;
 
-
+      
 const extra = clovers.has(index) || daisies.has(index);
 reveal(index);
 checkWords();
@@ -515,14 +594,14 @@ checkGameEnd();
 if (!resultShown) {
   switchTurn(extra);
 }
-
+      
 
 }
 
 function checkWords() {
 for (let word of Object.keys(wordMap)) {
 if (foundWords.has(word)) continue;
-const pos = wordMap[word];
+const pos = wordMap[word].positions; // .positions 추가
 if (pos.every(i => revealed[i])) {
 foundWords.add(word);
 foundBy[currentPlayer].push(word);
@@ -538,25 +617,27 @@ updateScore();
 function checkGameEnd() {
 const totalWords = Object.keys(wordMap).length;
 if (foundWords.size >= totalWords && totalWords > 0) {
-resultShown = true;
+resultShoven = true;
 
+      
   setTimeout(() => {
     alert("game over!");
   }, 500);
 }
+      
 
 }
 
 function handleGuess() {
 if (!gameStarted) return;
 
-
+      
 const guess = guessInput.value.trim();
 guessInput.value = "";
 if (!guess || foundWords.has(guess)) return;
 
 if (wordMap[guess]) {
-  const pos = wordMap[guess];
+  const pos = wordMap[guess].positions; // .positions 추가
   pos.forEach(i => {
     if (!revealed[i]) reveal(i);
   });
@@ -579,7 +660,7 @@ if (wordMap[guess]) {
 if (!resultShown) {
   switchTurn(false);
 }
-
+      
 
 }
 
@@ -594,11 +675,8 @@ guessBtn.onclick = handleGuess;
 guessInput.addEventListener(‘keypress’, e => {
 if (e.key === ‘Enter’) handleGuess();
 });
-};       
-
-
-
-
+};
 </script>
+
 </body>
 </html>
