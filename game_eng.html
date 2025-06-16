@@ -131,8 +131,8 @@
 <div class="game-container">
 
   <div class="player-name-row">
-    <div class="player-input"><input type="text" id="player1Name" placeholder="clover" /></div>
-    <div class="player-input"><input type="text" id="player2Name" placeholder="daisy" /></div>
+    <div class="player-input"><input type="text" id="player1Name" placeholder="first player" /></div>
+    <div class="player-input"><input type="text" id="player2Name" placeholder="second player" /></div>
   </div>
 
   <div class="start-section">
@@ -198,7 +198,7 @@ document.getElementById(‘game-desc’).innerHTML = htmlText; // innerHTML로 �
 
 const gridSize = 12;
 const totalCells = gridSize * gridSize;
-let board, revealed, wordMap, foundWords, currentPlayer, foundBy, words, usedIndexes;
+let board, revealed, wordMap, foundWords, currentPlayer, foundBy, words = [], usedIndexes;
 let clovers = new Set(), daisies = new Set(), resultShown = false, gameStarted = false;
 let player1 = “플레이어1”, player2 = “플레이어2”, currentPlayerName = “”, wrongGuesses = [];
 
