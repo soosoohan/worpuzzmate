@@ -167,7 +167,6 @@
   </div>
 
 </div>
-
 <script>
 window.onload = () => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -181,13 +180,11 @@ window.onload = () => {
     .then(res => res.json())
     .then(data => {
       document.getElementById('game-title').textContent = data.title || '게임 제목';
-const rawText = data.description || '게임 설명';
-const htmlText = rawText.replace(/\n/g, '<br>');
-      
+      const rawText = data.description || '게임 설명';
+      const htmlText = rawText.replace(/\n/g, '<br>');
+      document.getElementById('game-desc').innerHTML = htmlText; // innerHTML로 변경
 
-document.getElementById('game-desc').textContent = data.description || '게임 설명';
-
-words = [];
+      words = [];
       for (let length in data.words) {
         const count = data.wordCount[length] || 0;
         words.push(...getRandomSample(data.words[length], count));
@@ -265,26 +262,30 @@ words = [];
       gameEl.appendChild(cell);
     }
 
-    // 단어 배치 (재시도 로직 강화)
-    let placedWords = [];
-    shuffle(words);
-    
-    for (let word of words) {
-      let placed = false;
-      for (let attempt = 0; attempt < 500; attempt++) {
-        if (placeWord(word)) {
-          placedWords.push(word);
-          placed = true;
-          break;
+    // 방향 검증과 함께 단어 배치
+    if (placeAllWordsWithVariety()) {
+      console.log('모든 단어가 성공적으로 배치되었습니다 (3방향 사용)');
+    } else {
+      console.log('방향 검증 실패 - 기본 배치로 진행');
+      // 기본 배치 로직
+      let placedWords = [];
+      shuffle(words);
+      
+      for (let word of words) {
+        let placed = false;
+        for (let attempt = 0; attempt < 500; attempt++) {
+          if (placeWord(word)) {
+            placedWords.push(word);
+            placed = true;
+            break;
+          }
+        }
+        if (!placed) {
+          console.log('배치 실패한 단어:', word);
         }
       }
-      if (!placed) {
-        console.log('배치 실패한 단어:', word);
-      }
+      console.log('실제 배치된 단어 수:', placedWords.length);
     }
-    
-    console.log('실제 배치된 단어 수:', placedWords.length);
-    console.log('배치된 단어들:', placedWords);
     
     // 클로버/데이지 배치 (단어 영역 피하기)
     placeDaisies(3);
@@ -296,8 +297,8 @@ words = [];
     // 게임 종료 조건 확인
     checkGameEnd();
   }
-//수수 교체 시작 
-function canPlaceWord(word, x, y, dx, dy) {
+
+  function canPlaceWord(word, x, y, dx, dy) {
     for (let i = 0; i < word.length; i++) {
       let nx = x + dx * i, ny = y + dy * i;
       if (nx < 0 || ny < 0 || nx >= gridSize || ny >= gridSize) return false;
@@ -314,7 +315,7 @@ function canPlaceWord(word, x, y, dx, dy) {
       { x: 1, y: 0 },   // 가로 (오른쪽)
       { x: 0, y: 1 },   // 세로 (아래)
       { x: 1, y: 1 },   // 대각선 (오른쪽 아래)
-       ];
+    ];
     
     // 방향을 무작위로 섞어서 더 다양한 배치
     const shuffledDirections = directions.sort(() => Math.random() - 0.5);
@@ -330,7 +331,10 @@ function canPlaceWord(word, x, y, dx, dy) {
               usedIndexes.add(idx);
               positions.push(idx);
             }
-            wordMap[word] = positions;
+            wordMap[word] = {
+              positions: positions,
+              direction: [dir.x, dir.y] // 방향 정보 저장
+            };
             return true;
           }
         }
@@ -339,56 +343,62 @@ function canPlaceWord(word, x, y, dx, dy) {
     return false;
   }
 
-// 수수 교체 끝
-//수수 추가 시작
-
-function checkDirectionVariety() {
-  let directionCount = {
-    '1,0': 0,    // 가로
-    '0,1': 0,    // 세로
-    '1,1': 0     // 대각선
-  };
-  
-  // wordMap에서 각 단어의 방향 체크 (구체적인 구조에 따라 조정 필요)
-  for (let word in wordMap) {
-    // 여기서 각 단어의 방향을 확인해서 카운트
-    // 실제 코드는 wordMap 구조에 따라 달라질 수 있음
-  }
-  
-  // 3방향 모두 사용됐는지 확인
-  return directionCount['1,0'] > 0 && directionCount['0,1'] > 0 && directionCount['1,1'] > 0;
-}
-
-function placeAllWordsWithVariety() {
-  let attempts = 0;
-  const maxAttempts = 10;
-  
-  do {
-    // 초기화
-    board.fill('');
-    usedIndexes.clear();
-    wordMap = {};
+  function checkDirectionVariety() {
+    let directionCount = {
+      '1,0': 0,    // 가로
+      '0,1': 0,    // 세로
+      '1,1': 0     // 대각선
+    };
     
-    // 모든 단어 배치 시도
-    let allPlaced = true;
-    for (let word of words) {
-      if (!placeWord(word)) {
-        allPlaced = false;
-        break;
+    // wordMap에서 각 단어의 방향 체크
+    for (let word in wordMap) {
+      const direction = wordMap[word].direction;
+      const key = direction[0] + ',' + direction[1];
+      if (directionCount.hasOwnProperty(key)) {
+        directionCount[key]++;
       }
     }
     
-    if (allPlaced && checkDirectionVariety()) {
-      return true; // 성공
-    }
+    console.log('방향별 사용 횟수:', directionCount);
     
-    attempts++;
-  } while (attempts < maxAttempts);
-  
-  return false; // 실패
-}
+    // 3방향 모두 사용됐는지 확인
+    return directionCount['1,0'] > 0 && directionCount['0,1'] > 0 && directionCount['1,1'] > 0;
+  }
 
-// 수수 추가 끝
+  function placeAllWordsWithVariety() {
+    let attempts = 0;
+    const maxAttempts = 10;
+    
+    do {
+      // 초기화
+      board = Array(totalCells).fill(null);
+      usedIndexes.clear();
+      wordMap = {};
+      
+      // 모든 단어 배치 시도
+      let allPlaced = true;
+      const shuffledWords = [...words].sort(() => Math.random() - 0.5);
+      
+      for (let word of shuffledWords) {
+        if (!placeWord(word)) {
+          allPlaced = false;
+          break;
+        }
+      }
+      
+      if (allPlaced && checkDirectionVariety()) {
+        console.log(`성공! ${attempts + 1}번째 시도에서 3방향 모두 사용됨`);
+        return true; // 성공
+      }
+      
+      attempts++;
+      console.log(`${attempts}번째 시도 실패 - 다시 시도`);
+    } while (attempts < maxAttempts);
+    
+    console.log('최대 시도 횟수 초과 - 기본 배치로 진행');
+    return false; // 실패
+  }
+
   function placeClovers(count) {
     let placed = 0;
     let attempts = 0;
@@ -530,7 +540,7 @@ function placeAllWordsWithVariety() {
   function checkWords() {
     for (let word of Object.keys(wordMap)) {
       if (foundWords.has(word)) continue;
-      const pos = wordMap[word];
+      const pos = wordMap[word].positions; // .positions 추가
       if (pos.every(i => revealed[i])) {
         foundWords.add(word);
         foundBy[currentPlayer].push(word);
@@ -543,28 +553,26 @@ function placeAllWordsWithVariety() {
     }
   }
 
-  
-function checkGameEnd() {
-  const totalWords = Object.keys(wordMap).length;
-  if (foundWords.size >= totalWords && totalWords > 0) {
-    resultShown = true;
+  function checkGameEnd() {
+    const totalWords = Object.keys(wordMap).length;
+    if (foundWords.size >= totalWords && totalWords > 0) {
+      resultShown = true;
+      
+      setTimeout(() => {
+        alert("game over!");
+      }, 500);
+    }
+  } 
+
+  function handleGuess() {
+    if (!gameStarted) return;
     
-    setTimeout(() => {
-      alert("game over!");
-    }, 500);
-  }
-} 
-function handleGuess() {
-  if (!gameStarted) return;
-  }
-
-
     const guess = guessInput.value.trim();
     guessInput.value = "";
     if (!guess || foundWords.has(guess)) return;
     
     if (wordMap[guess]) {
-      const pos = wordMap[guess];
+      const pos = wordMap[guess].positions; // .positions 추가
       pos.forEach(i => {
         if (!revealed[i]) reveal(i);
       });
@@ -602,6 +610,5 @@ function handleGuess() {
   });
 };
 </script>
-
 </body>
 </html>
