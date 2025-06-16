@@ -319,11 +319,16 @@ window.onload = () => {
     
     // 방향을 무작위로 섞어서 더 다양한 배치
     const shuffledDirections = directions.sort(() => Math.random() - 0.5);
-    
+   
     for (let dir of shuffledDirections) {
-      for (let y = 0; y < gridSize; y++) {
-        for (let x = 0; x < gridSize; x++) {
-          if (canPlaceWord(word, x, y, dir.x, dir.y)) {
+const startY = Math.floor(Math.random() * gridSize);
+for (let i = 0; i < gridSize; i++) {
+  const y = (startY + i) % gridSize;
+  for (let x = 0; x < gridSize; x++) {
+
+          
+
+if (canPlaceWord(word, x, y, dir.x, dir.y)) {
             let positions = [];
             for (let i = 0; i < word.length; i++) {
               let nx = x + dir.x * i, ny = y + dir.y * i, idx = ny * gridSize + nx;
@@ -514,7 +519,7 @@ window.onload = () => {
   function updateTurnDisplay() {
     if (!gameStarted) return;
     currentPlayerName = currentPlayer === 'player1' ? player1 : player2;
-    currentTurnEl.textContent = `It is ${currentPlayerName}'s turn.`;
+    currentTurnEl.textContent = `${currentPlayerName}님의 차례입니다`;
   }
 
   function switchTurn(extra) {
