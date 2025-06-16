@@ -519,7 +519,7 @@ if (canPlaceWord(word, x, y, dir.x, dir.y)) {
   function updateTurnDisplay() {
     if (!gameStarted) return;
     currentPlayerName = currentPlayer === 'player1' ? player1 : player2;
-    currentTurnEl.textContent = `It is ${currentPlayerName}'turn.`;
+    currentTurnEl.textContent = `It is ${currentPlayerName}' turn.`;
   }
 
   function switchTurn(extra) {
