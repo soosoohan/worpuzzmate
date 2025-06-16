@@ -428,15 +428,15 @@ const y = Math.floor(idx / gridSize);
 // 단어가 있는 칸은 피하기
 if (usedIndexes.has(idx)) return false;
 
-// 주변 8칸에 단어가 있으면 피하기
+// 주변 8칸에 다른 특수 아이템이 있는지만 확인
 for (let dy = -1; dy <= 1; dy++) {
   for (let dx = -1; dx <= 1; dx++) {
+    if (dx === 0 && dy === 0) continue; // 자기 자신은 제외
     const nx = x + dx;
     const ny = y + dy;
     if (nx >= 0 && nx < gridSize && ny >= 0 && ny < gridSize) {
       const nIdx = ny * gridSize + nx;
-      if (usedIndexes.has(nIdx)) return false;
-      // 주변에 다른 특수 아이템이 있는지도 확인
+      // 주변에 다른 특수 아이템이 있는지만 확인
       if (clovers.has(nIdx) || daisies.has(nIdx)) return false;
     }
   }
