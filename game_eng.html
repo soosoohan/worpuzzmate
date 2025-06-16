@@ -198,7 +198,7 @@ document.getElementById(‘game-desc’).innerHTML = htmlText; // innerHTML로 �
 
 const gridSize = 12;
 const totalCells = gridSize * gridSize;
-let board, revealed, wordMap, foundWords, currentPlayer, foundBy, words = [], usedIndexes;
+let board, revealed, wordMap, foundWords, currentPlayer, foundBy, words, usedIndexes;
 let clovers = new Set(), daisies = new Set(), resultShown = false, gameStarted = false;
 let player1 = “플레이어1”, player2 = “플레이어2”, currentPlayerName = “”, wrongGuesses = [];
 
@@ -420,7 +420,6 @@ return false; // 실패
 
 }
 
-// 개선된 특수 아이템 배치 함수들
 function isSafeForSpecial(idx) {
 const x = idx % gridSize;
 const y = Math.floor(idx / gridSize);
@@ -437,6 +436,8 @@ for (let dy = -1; dy <= 1; dy++) {
     if (nx >= 0 && nx < gridSize && ny >= 0 && ny < gridSize) {
       const nIdx = ny * gridSize + nx;
       if (usedIndexes.has(nIdx)) return false;
+      // 주변에 다른 특수 아이템이 있는지도 확인
+      if (clovers.has(nIdx) || daisies.has(nIdx)) return false;
     }
   }
 }
@@ -445,66 +446,32 @@ return true;
 
 }
 
-function isAdjacentToSpecials(idx) {
-const x = idx % gridSize;
-const y = Math.floor(idx / gridSize);
-
-
-// 주변 8칸에 클로버나 데이지가 있는지 확인
-for (let dy = -1; dy <= 1; dy++) {
-  for (let dx = -1; dx <= 1; dx++) {
-    if (dx === 0 && dy === 0) continue; // 자기 자신은 제외
-    const nx = x + dx;
-    const ny = y + dy;
-    if (nx >= 0 && nx < gridSize && ny >= 0 && ny < gridSize) {
-      const nIdx = ny * gridSize + nx;
-      if (clovers.has(nIdx) || daisies.has(nIdx)) {
-        return true;
-      }
-    }
-  }
+function placeClovers(count) {
+let placed = 0;
+let attempts = 0;
+while (placed < count && attempts < 2000) {
+const idx = Math.floor(Math.random() * totalCells);
+if (isSafeForSpecial(idx)) {
+clovers.add(idx);
+placed++;
 }
-return false;
-
-
+attempts++;
+}
+console.log(‘배치된 클로버 수:’, clovers.size);
 }
 
 function placeDaisies(count) {
 let placed = 0;
 let attempts = 0;
-while (placed < count && attempts < 2000) { // 시도 횟수 증가
+while (placed < count && attempts < 2000) {
 const idx = Math.floor(Math.random() * totalCells);
-
-
-  // 기본 안전성 체크 + 다른 특수 아이템과 인접하지 않는지 체크
-  if (isSafeForSpecial(idx) && !isAdjacentToSpecials(idx)) {
-    daisies.add(idx);
-    placed++;
-  }
-  attempts++;
+if (isSafeForSpecial(idx)) {
+daisies.add(idx);
+placed++;
 }
-console.log('배치된 데이지 수:', daisies.size);
-
-
+attempts++;
 }
-
-function placeClovers(count) {
-let placed = 0;
-let attempts = 0;
-while (placed < count && attempts < 2000) { // 시도 횟수 증가
-const idx = Math.floor(Math.random() * totalCells);
-
-
-  // 기본 안전성 체크 + 다른 특수 아이템과 인접하지 않는지 체크
-  if (isSafeForSpecial(idx) && !isAdjacentToSpecials(idx)) {
-    clovers.add(idx);
-    placed++;
-  }
-  attempts++;
-}
-console.log('배치된 클로버 수:', clovers.size);
-
-
+console.log(‘배치된 데이지 수:’, daisies.size);
 }
 
 function fillEmptyCells() {
