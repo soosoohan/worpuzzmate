@@ -131,8 +131,8 @@
 <div class="game-container">
 
   <div class="player-name-row">
-    <div class="player-input"><input type="text" id="player1Name" placeholder="데이지" /></div>
-    <div class="player-input"><input type="text" id="player2Name" placeholder="클로버" /></div>
+    <div class="player-input"><input type="text" id="player1Name" placeholder="먼저 하실 분" /></div>
+    <div class="player-input"><input type="text" id="player2Name" placeholder="나중에 하실 분" /></div>
   </div>
 
   <div class="start-section">
@@ -402,102 +402,61 @@ for (let i = 0; i < gridSize; i++) {
     return false; // 실패
   }
 
-function getRandomSpreadPositions(gridSize, count) {
-  const positions = [];
-  const cellsPerFlower = Math.floor((gridSize * gridSize) / count);
-  
-  for (let i = 0; i < count; i++) {
-    const targetIdx = i * cellsPerFlower + Math.floor(Math.random() * cellsPerFlower/2);
-    const x = targetIdx % gridSize;
-    const y = Math.floor(targetIdx / gridSize);
-    
-    const safeX = Math.min(x, gridSize - 1);
-    const safeY = Math.min(y, gridSize - 1);
-    
-    positions.push({ x: safeX, y: safeY });
-  }
-  
-  return positions;
-}
 
-function placeDaisies(count) {
-  const targetPositions = getRandomSpreadPositions(gridSize, count);
-  let placed = 0;
+  function placeClovers(count) {
+    let placed = 0;
+    let attempts = 0;
+    while (placed < count && attempts < 1000) {
+      const idx = Math.floor(Math.random() * totalCells);
+      if (!usedIndexes.has(idx) && !clovers.has(idx) && !daisies.has(idx)) {
+        // 주변에 단어가 없는지 확인
+        if (isSafeForSpecial(idx)) {
+          clovers.add(idx);
+          placed++;
+        }
+      }
+      attempts++;
+    }
+    console.log('배치된 클로버 수:', clovers.size);
+  }
+
+  function placeDaisies(count) {
+    let placed = 0;
+    let attempts = 0;
+    while (placed < count && attempts < 1000) {
+      const idx = Math.floor(Math.random() * totalCells);
+      if (!usedIndexes.has(idx) && !clovers.has(idx) && !daisies.has(idx)) {
+        // 주변에 단어가 없는지 확인
+        if (isSafeForSpecial(idx)) {
+          daisies.add(idx);
+          placed++;
+        }
+      }
+      attempts++;
+    }
+    console.log('배치된 데이지 수:', daisies.size);
+  }
+
+function isSafeForSpecial(idx) {
+  const x = idx % gridSize;
+  const y = Math.floor(idx / gridSize);
   
-  for (let pos of targetPositions) {
-    if (placed >= count) break;
-    
-    // 목표 위치 근처에서 빈 자리 찾기
-    for (let radius = 0; radius < 3 && placed < count; radius++) {
-      for (let dy = -radius; dy <= radius && placed < count; dy++) {
-        for (let dx = -radius; dx <= radius && placed < count; dx++) {
-          const x = pos.x + dx;
-          const y = pos.y + dy;
-          
-          if (x >= 0 && x < gridSize && y >= 0 && y < gridSize) {
-            const idx = y * gridSize + x;
-            if (!usedIndexes.has(idx) && !clovers.has(idx) && !daisies.has(idx)) {
-              if (isSafeForSpecial(idx)) {
-                daisies.add(idx);
-                placed++;
-              }
-            }
-          }
+  // 주변 8칸에 다른 아이템이 있는지만 확인 (단어는 상관없음)
+  for (let dy = -1; dy <= 1; dy++) {
+    for (let dx = -1; dx <= 1; dx++) {
+      if (dx === 0 && dy === 0) continue;
+      const nx = x + dx;
+      const ny = y + dy;
+      if (nx >= 0 && nx < gridSize && ny >= 0 && ny < gridSize) {
+        const nIdx = ny * gridSize + nx;
+        if (clovers.has(nIdx) || daisies.has(nIdx)) {
+          return false;
         }
       }
     }
   }
-  console.log('배치된 데이지 수:', daisies.size);
+  return true;
 }
-
-function placeClovers(count) {
-  const targetPositions = getRandomSpreadPositions(gridSize, count);
-  let placed = 0;
-  
-  for (let pos of targetPositions) {
-    if (placed >= count) break;
-    
-    for (let radius = 0; radius < 3 && placed < count; radius++) {
-      for (let dy = -radius; dy <= radius && placed < count; dy++) {
-        for (let dx = -radius; dx <= radius && placed < count; dx++) {
-          const x = pos.x + dx;
-          const y = pos.y + dy;
-          
-          if (x >= 0 && x < gridSize && y >= 0 && y < gridSize) {
-            const idx = y * gridSize + x;
-            if (!usedIndexes.has(idx) && !clovers.has(idx) && !daisies.has(idx)) {
-              if (isSafeForSpecial(idx)) {
-                clovers.add(idx);
-                placed++;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  console.log('배치된 클로버 수:', clovers.size);
-}
-
-
-
-  function isSafeForSpecial(idx) {
-    const x = idx % gridSize;
-    const y = Math.floor(idx / gridSize);
-    
-    // 주변 8칸 확인
-    for (let dy = -1; dy <= 1; dy++) {
-      for (let dx = -1; dx <= 1; dx++) {
-        const nx = x + dx;
-        const ny = y + dy;
-        if (nx >= 0 && nx < gridSize && ny >= 0 && ny < gridSize) {
-          const nIdx = ny * gridSize + nx;
-          if (usedIndexes.has(nIdx)) return false;
-        }
-      }
-    }
-    return true;
-  }
 
   function fillEmptyCells() {
     const filler = '같갛개거건걸것게고괴교국궁그근금기긴까깜깨꺾껴꼼꽁꾸끔난내넘넣네놀놈누뉴는니님다닥대댄더던덩데도동두드득든듣들등디딜딱때땡똑뚫뛰라락란람랐랑래랜러레려력렸로롭르른를리린림마만맛맞맨머먼멀메멘며몰무묻뭘미민바받방버벅번봐봤부붙브블비빈빌빔빠빡빨빼뻥사새생서섭섰세숙쉬슴실싶쌍쓰씌씻아악알았애야어엄업없었엉에여열옛오온올와왔왜우울원위유윤으을음의익인잃있잊작잖잘저전제져좋주줬짜짝찍차착참창채척천청체쳤초출췄취치친카켜코콜크테토트튼폭핀하학한할해햄했행현호혼화환히'.split('');
