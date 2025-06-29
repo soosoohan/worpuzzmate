@@ -73,6 +73,29 @@
       font-size: 0.85em;
       color: #05676e;
     }
+.description p {
+    font-size: 0.95em;
+    line-height: 1.6;
+    margin: 1em auto;
+    max-width: 600px;
+  }
+
+  .description button {
+    font-size: 0.9em;
+    padding: 8px 16px;
+    background-color: #FFE2E2;
+    border: none;
+    border-radius: 12px;
+    margin-top: 8px;
+    color: #8785A2;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .description button:hover {
+    background-color: #FFC7C7;
+    color: white;
+  }
   </style>
 </head>
 <body>
@@ -98,12 +121,12 @@
   English word pools are categorized into A1, A2, B1, B2, and C1 levels,<br>
   based on the CEFR system defined by the Oxford English Dictionary.<br>
   Choose a word pool to begin the game.
-</div>
-    <button onclick="window.open(' https://youtu.be/CBsAPF3X5uQ?si=L81CQ3-Fs5tUnMsD', '_blank')"
+
+<button onclick="window.open(' https://youtu.be/CBsAPF3X5uQ?si=L81CQ3-Fs5tUnMsD', '_blank')"
   class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
   🎥 튜토리얼 영상 보기
 </button>
-
+</div>
   
   <div class="row-container">
     <!-- 왼쪽: ENGLISH -->
@@ -140,44 +163,42 @@
 
 
 <br>
+<br>
 
+<div class="description">
 
-<div class="credits">
-
-<p>
+<p> <strong>한수수가 만든 다른 게임들도 소개합니다.</strong><br>
 <strong>워퍼즈 클래식</strong>
     격자 속에 숨어있는 단어 찾기 게임. 마음의 평화 보장.<br>
     <em>Worpuzz Classic:</em> For the calm-hearted. A low-stimulus, original word puzzle experience.<br>
       <button onclick="location.href='https://soosoohan.github.io/worpuzz/'">워퍼즈 클래식</button>
-</p>
+ </p>
 
   <p>
     <strong>워퍼즈 메이트</strong>
     친구와 같이 하는 단어 찾기 게임! 두근두근 보장!<br>
     <em>Worpuzz Mate:</em> A word puzzle game to play with a friend! Thrills guaranteed!<br>
       <button onclick="location.href='https://soosoohan.github.io/worpuzzmate/'">워퍼즈 메이트</button>
-</p>
+ </p>
 
   <p>
     <strong>넘즐</strong>
     숫자 카드로 목표값에 가까운 수식을 만드는 수학 게임! 두뇌 개발 보장!<br>
     <em>Numzzle:</em> A math card game to build formulas close to the target number! Brain power guaranteed!<br>
-  
       <button onclick="location.href='https://soosoohan.github.io/numzzle/'">넘즐</button>
-</p>
+ </p>
 
   <p>
     <strong>트링클</strong>
     별을 이어 삼각형을 만드는 우주 땅따먹기 전략 게임! 재미 보장!<br>
     <em>Trinkle:</em> A space strategy game where you connect stars to make triangles! Fun guaranteed!<br>
       <button onclick="location.href='https://soosoohan.github.io/trinkle/'">트링클</button>
-</p>
+ </p>
 
   <p>
     <strong>워퍼즈봇</strong>
     똑똑해진 컴퓨터와 퍼즐 대결! 재미와 어휘력 두 마리 토끼 잡기 보장!<br>
-    <em>Worpuzz Bot:</em> Battle a smarter computer! Boost your vocabulary and enjoy the challenge!<br>
-      
+    <em>Worpuzz Bot:</em> Battle a smarter computer! Boost your vocabulary and enjoy the challenge!<br>  
     <button onclick="location.href='https://soosoohan.github.io/worpuzz-bot/'">워퍼즈봇</button>
   </p>
 <p>
@@ -186,8 +207,8 @@
     <em>Moeum - Quiz:</em> A Korean puzzle game where vowels guide you to the answer!<br>
       <button onclick="location.href='https://soosoohan.github.io/worpuzz-bot/'">모음 퀴즈</button>
   </p>
-
-
+</div>
+<div class="credits">
   <p>만든 사람: 한수수 <br>
      ⓒ 2025 한수수. 이 게임의 저작권은 제작자 한수수에게 있으며,<br>
      무단 복제, 배포, 2차 창작을 금합니다.<br>
