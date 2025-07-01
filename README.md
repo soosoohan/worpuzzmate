@@ -33,11 +33,6 @@ Inspired by Minesweeper, it challenges players to uncover hidden words on a tile
 ---
 ### 🧪 한수수의 다른 게임들 | Other Games by Soosoo Han
 
-- **워퍼즈 (Worpuzz)**  
-  격자 속에 숨어있는 단어를 찾으며 컴퓨터와 겨루며 어휘력을 키우는 게임  
-  *Find hidden words in the grid and build your vocabulary*  
-  👉 http://soosoohan.github.io/worpuzz
-
 - **넘즐 (Numzzle)**  
   수학을 재미있게! 목표 숫자에 가까운 수식을 만드는 게임  
   *Make math fun! Create formulas to match the target number*  
@@ -48,10 +43,10 @@ Inspired by Minesweeper, it challenges players to uncover hidden words on a tile
   *Connect stars to draw triangles in this cosmic strategy game*  
   👉 http://soosoohan.github.io/trinkle
 
-- **워퍼즈봇 (Worpuzz Bot)**  
-  격자 속에 숨어있는 단어를 찾으며 어휘력을 키우는 게임. 워퍼즈의 업그레이드 버전  
+- **워퍼즈 (Worpuzz Bot)**  
+  격자 속에 숨어있는 단어를 찾으며 어휘력을 키우는 게임.  
   *Compete to guess or uncover words hidden in the grid*  
-  👉 http://soosoohan.github.io/worpuzz-bot
+  👉 http://soosoohan.github.io/worpuzz
 
 - **모음 퀴즈(Moeum Quiz)**  
     모음과 힌트를 보고 자음을 맞추어 단어나 구절이나 문장을 완성하는 퍼즐 게임. 
