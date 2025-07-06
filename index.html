@@ -1,485 +1,215 @@
 <!DOCTYPE html>
-
-<html lang="ko">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>워퍼즈 메이트 인덱스</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script:wght@400&display=swap');
-
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Nanum Pen Script', cursive;
-    background: #2e8b8b ;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-.blackboard {
-    width: 98vw;
-    height: 95vh;
-    background: #2e8b8b;
-    position: relative;
+  <meta charset="UTF-8" />
+  <title>WorpuzzMate index</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8f7;
+      margin: 0;
+      padding: 40px;
+      text-align: center;
     }
 
-.blackboard::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    
-}
-
-.chalk-text {
-    color: #f0f8ff;
-    font-family: 'Nanum Pen Script', cursive;
-}
-
-.main-title {
-    position: absolute;
-    top: 4%;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 3em;
-    font-weight: bold;
-    text-align: center;
-margin-bottom: 4px; /* 간격 조절 */
-    
-}
-
-
-.schedule-board {
-    position: absolute;
-    color: #2e8b8b;
-    top: 8%;
-    left: 3%;
-    padding: 15px;
-    color: #333;
-    width: 200px;
-    font-family: 'Nanum Pen Script', cursive;
-}
-
-
-
-.schedule-title {
-    font-size: 1.3em;
-       color: #ddd;
-    text-align: center;
-    margin-bottom: 12px;
-    font-weight: bold;
-    border-bottom: 2px solid #2e8b8b;
-    padding-bottom: 6px;
-    border-bottom: 2px solid #f0f8ff;
-
-}
-
-.schedule-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px; /* 버튼 주변 여백 */
-    border-bottom: 1px solid #ccc;
-    color: #2e8b8b;
-background-color: #2e8b8b;  /* 칠판색 */
-
-    font-size: 1.0em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-.schedule-item:last-child {
-    border-bottom: none;
-}
-
-.schedule-item:hover {
-    background-color: rgba(46, 139, 139, 0.1);
-    border-radius: 4px;
-}
-
-.schedule-emoji {
-    font-size: 1.1em;
-}
-.schedule-item .game-button {
-padding: 15px 25px;
-font-size: 1.3em;
-background: rgba(255,255,255,0.9);
-color: #2e8b8b;
-border: none;
-border-radius: 10px;
-cursor: pointer;
-transition: all 0.3s ease;
-width: 100%;
-display: flex;
-align-items: center;
-justify-content: space-between;
-
-font-family: 'Nanum Pen Script', cursive;
-box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-.schedule-item .game-button:hover {
-background: #f0f8ff;
-transform: translateY(-3px);
-box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-}
-
-.game-description {
-    position: absolute;
-    top: 18%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    color: #f0f8ff;
-    font-size: 1.3em;
-    text-align: left;
-    z-index: 10;
-   line-height: 1.3;  
-
-}
-
-.game-description h3 {
-    color: #add8e6;
-    margin-bottom: 10px;
-    font-size: 1.4em;
-    border-bottom: 2px solid #add8e6;
-    padding-bottom: 5px;
-}
-
-.game-description p {
-    margin-bottom: 15px;
-}
-
-.game-description ul {
-    margin-bottom: 15px;
-    padding-left: 20px;
-}
-
-.game-description li {
-    margin-bottom: 8px;
-}
-
-
-.language-toggle {
-    position: absolute;
-    top: 15%;
-    right: 3%;
-    background: rgba(255,255,255,0.9);
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
-
-.language-button {
-    background: #2e8b8b;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    margin: 2px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: 'Nanum Pen Script', cursive;
-    font-size: 1.1em;
-    transition: all 0.3s ease;
-}
-
-.language-button:hover {
-    background: #20b2aa;
-}
-
-.language-button.active {
-    background: #ff69b4;
-}
-
-.credits-area {
-    position: absolute;
-    bottom: 5%;
-    right: 5%;
-    color: #f0f8ff;
-    font-size: 1.1em;
-    line-height: 1.4;
-    text-align: right;
-}
-
-.credits-item {
-    margin-bottom: 8px;
-    transform: rotate(-1deg);
-}
-
-.credits-item:nth-child(2) {
-    transform: rotate(0.5deg);
-}
-
-.heart {
-    color: #ff69b4;
-    font-size: 0.9em;
-}
-
-.game-menu {
-    position: absolute;
-    bottom: 6%;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 50px;
-    max-width: 90vw;
-   
-}
-.main-game-button {
-    background: rgba(255,255,255,0.9);
-    color: #2e8b8b;
-    padding: 15px 25px;
-    border: none;
-    border-radius: 10px;
-    font-size: 1.3em;
-    font-family: 'Nanum Pen Script', cursive;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-.main-game-button:hover {
-    background: #f0f8ff;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-    min-width: 160px;
-
-
-}
-.chalk-area {
-    position: absolute;
-    bottom: 3%;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: flex-end;
-    gap: 15px;
-}
-.eraser {
-    position: absolute;
-    bottom: 5%;
-    left: 8%;
-    width: 40px;
-    height: 20px;
-    background: #ffb6c1;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    transform: rotate(15deg);
-}
-
-.chalk-pieces {
-    position: absolute;
-    bottom: 7%;
-    left: 12%;
-    display: flex;
-    gap: 5px;
-}
-
-.chalk {
-    width: 8px;
-    height: 30px;
-    background: #f0f8ff;
-    border-radius: 4px;
-    transform: rotate(45deg);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-}
-
-.chalk:nth-child(2) {
-    transform: rotate(-30deg);
-    background: #ffe4e1;
-}
-
-.chalk:nth-child(3) {
-    transform: rotate(60deg);
-    background: #e6ffe6;
-}
-
-.hidden {
-    display: none;
-}
-
-@media (max-height: 800px) {
-    .blackboard {
-        border: none;  /* 테두리 제거 */
-        width: 100vw;
-        height: 100vh;
-        border-radius: 0;
+    h1 {
+      font-size: 3em;
+      color: #05676e;
+      margin-bottom: 10px;
     }
-}
-</style>
+
+    .description {
+      margin-bottom: 30px;
+      color: #05676e;
+      font-size: 1.1em;
+    }
+
+    .row-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 60px;
+      max-width: 800px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+
+    .column {
+      flex: 1 1 300px;
+    }
+
+    .column h2 {
+      color: #089992;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #089992;
+      padding-bottom: 5px;
+    }
+
+    .btn-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: stretch;
+    }
+
+    .btn-list button {
+      padding: 10px;
+      font-size: 15px;
+      border: none;
+      border-radius: 8px;
+      background-color: #c8f4ee;
+      color: #064d4d;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .btn-list button:hover {
+      background-color: #1d9e95;
+      color: white;
+    }
+
+    .credits {
+      margin-top: 50px;
+      font-size: 0.85em;
+      color: #05676e;
+    }
+  </style>
 </head>
 <body>
-    <div class="blackboard">
-        <div class="schedule-board">
-            <div class="schedule-title">수수의 게임들</div>
 
-  <div class="schedule-item" >
-            
-           <button class="game-button"onclick="location.href='https://soosoohan.github.io/numzzle/'">  <span class="schedule-emoji">🔢</span>
-                <span>넘즐</span></button>
-            </div>
-            <div class="schedule-item" >
-               
-                <button class="game-button" onclick="location.href='https://soosoohan.github.io/worpuzz/'"><span class="schedule-emoji">📝</span>
-                <span>워퍼즈</span></button>
-            </div>
-            <div class="schedule-item" >
-               <button class="game-button" onclick="location.href='https://soosoohan.github.io/moeum-quiz/'"> <span class="schedule-emoji">📚</span>
-                <span>모음퀴즈</span></button>
-            </div>
+  <h1>WorpuzzMate</h1>
 
-<div class="schedule-item" >
-                <button class="game-button"onclick="location.href='https://soosoohan.github.io/trinkle/'"><span class="schedule-emoji">✨</span>
-                <span>트링클</span></button>
-            </div>
+<div class="description">
 
-<div class="schedule-item" >
-                <button class="game-button" onclick="location.href='https://soosoohan.github.io/worpuzzmate/'">              <span class="schedule-emoji">👥</span>
-<span>워퍼즈메이트</span></button>
-              </div>
-<div class="schedule-item" >
-              <button class="game-button"><span class="schedule-emoji">➕</span>
-                <span>플마</span></button>
+  두 사람이 교대로 격자를 클릭해, 가로, 세로, 대각선 방향으로 숨겨진 단어를 찾아가는 게임입니다.<br>
+  단어의 마지막 글자를 열면 해당 단어를 획득하며, 더 많은 단어를 찾은 사람이 승리합니다.<br>
+  격자를 여는 것 외에도, 단어를 직접 추리하여 입력할 수 있으며 정답일 경우 해당 칸들이 모두 열립니다.<br>
+  🍀 네잎클로버를 클릭하면 주변 4칸이 열리고 한 번 더 턴을 얻습니다.<br>
+  🌼 데이지를 클릭하면 주변 8칸이 모두 열리고 역시 한 번 더 턴을 얻습니다.<br>
+  영어 단어는 A1, A2, B1, B2, C1 수준으로 구성되어 있으며,<br>
+  이는 CEFR 기준에 따라 옥스포드 영어사전에서 분류한 난이도입니다.<br>
+  원하는 워드풀을 선택해 게임을 시작하세요.<br><br>
+
+  Two players take turns clicking tiles to find hidden words placed horizontally, vertically, or diagonally.<br>
+  Whoever opens the last letter of a word claims it, and the player with the most words wins.<br>
+  In addition to opening tiles, players can also type in their word guesses. If correct, all tiles of that word will be revealed.<br>
+  🍀 Clicking a clover opens 4 adjacent tiles and grants an extra turn.<br>
+  🌼 Clicking a daisy opens all 8 surrounding tiles and also gives an extra turn.<br>
+  English word pools are categorized into A1, A2, B1, B2, and C1 levels,<br>
+  based on the CEFR system defined by the Oxford English Dictionary.<br>
+  Choose a word pool to begin the game.
+</div>
+      <div class="btn-list">
+<button onclick="window.open(' https://youtu.be/CBsAPF3X5uQ?si=L81CQ3-Fs5tUnMsD', '_blank')"
+  class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+  🎥 튜토리얼 영상 보기
+</button>
+</div>
+  
+  <div class="row-container">
+    <!-- 왼쪽: ENGLISH -->
+    <div class="column">
+      <h2>ENGLISH</h2>
+      <div class="btn-list">
+        
+        
+<button onclick="startGame('e1', true)">A1 Oxford Beginner</button>
+<button onclick="startGame('e2', true)">A2 Oxford Elementary</button>
+<button onclick="startGame('e3', true)">B1 Oxford Intermediate</button>
+<button onclick="startGame('e4', true)">B2 Oxford Upper-Intermediate</button>
+<button onclick="startGame('e5', true)">C1 Oxford Advanced</button>
+<button onclick="startGame('e6', true)">Tour</button>
+<button onclick="startGame('e7', true)">Organism</button>
+
+      </div>
+      </div>
+
+      
+    <!-- 오른쪽: KOREAN -->
+    <div class="column">
+      <h2>KOREAN</h2>
+      <div class="btn-list">
+        
+<button onclick="startGame('k1', false)">사자성어/고사성어</button>
+<button onclick="startGame('k2', false)">음성상징어(의태어/의성어)</button>
+<button onclick="startGame('k3', false)">여행 </button>
+<button onclick="startGame('k4', false)">동물과 식물</button>
+  
+      </div>
+    </div>
   </div>
-        </div>
+
+
+<br>
+
+
+<div class="credits">
 
 <p>
+<strong>워퍼즈 클래식</strong>
+    격자 속에 숨어있는 단어 찾기 게임. 마음의 평화 보장.<br>
+    <em>Worpuzz Classic:</em> For the calm-hearted. A low-stimulus, original word puzzle experience.<br>
+    <div class="btn-list">
+      <button onclick="location.href='https://soosoohan.github.io/worpuzz/'">워퍼즈 클래식</button>
+  </div></p>
 
-    <h1 class="chalk-text main-title">워퍼즈 메이트 </h1></p>
-    
-    <div class="language-toggle">
-        <button class="language-button active" onclick="toggleLanguage('ko')">한국어</button>
-        <button class="language-button" onclick="toggleLanguage('en')">English</button>
-    </div>
-    
-    <div class="game-description chalk-text" id="korean-description">
-        <h3>🎮 게임 소개</h3>
-<p>워퍼즈 메이트 (WORPUZZ)=단어(WORD) + 퍼즐(PUZZLE) +친구 (MATE)</p>
-        <h3>📋 게임 규칙</h3>
-        <ul>
-            <li>두 사람이 교대로 격자를 클릭해, 가로, 세로, 대각선 방향으로 숨겨진 단어를 찾아가는 게임입니다.</li>
-            <li>단어는 가로, 세로, 대각선 방향으로 숨겨져 있으며, 마지막 글자를 열면 해당 단어를 획득합니다.</li>
-            <li>더 많은 단어를 찾는 것이 목표이며,  "게임 종료" 가 보일 때  찾은 단어의 수로 승패가 결정됩니다.</li>
-            <li>🍀 클로버를 찾으면 주변 4칸이 열리며 추가 턴이 주어집니다.</li>
-            <li>🌼 데이지를 열면 주변 8칸이 모두 열리며 마찬가지로 추가 턴이 주어집니다.</li>
-<li>영어 단어는 A1, A2, B1, B2, C1 수준으로 구성되어 있으며,이는 CEFR 기준에 따라 옥스포드 영어사전에서 분류한 난이도입니다.</li>
-             
-<li>아래에서 원하는 워드풀을 선택해 게임을 시작하세요.</li>
-        </ul>
-    </div>
+  <p>
+    <strong>워퍼즈 메이트</strong>
+    친구와 같이 하는 단어 찾기 게임! 두근두근 보장!<br>
+    <em>Worpuzz Mate:</em> A word puzzle game to play with a friend! Thrills guaranteed!<br>
+    <div class="btn-list">
+      <button onclick="location.href='https://soosoohan.github.io/worpuzzmate/'">워퍼즈 메이트</button>
+  </div></p>
 
+  <p>
+    <strong>넘즐</strong>
+    숫자 카드로 목표값에 가까운 수식을 만드는 수학 게임! 두뇌 개발 보장!<br>
+    <em>Numzzle:</em> A math card game to build formulas close to the target number! Brain power guaranteed!<br>
+    <div class="btn-list">
+      <button onclick="location.href='https://soosoohan.github.io/numzzle/'">넘즐</button>
+  </div></p>
 
-    <div class="game-description chalk-text hidden" id="english-description">
-        <h3>🎮 Game Overview</h3>
-        <p>WORPUZZMATE = WORD + PUZZLE + MATE<br>
-           </p>
+  <p>
+    <strong>트링클</strong>
+    별을 이어 삼각형을 만드는 우주 땅따먹기 전략 게임! 재미 보장!<br>
+    <em>Trinkle:</em> A space strategy game where you connect stars to make triangles! Fun guaranteed!<br>
+    <div class="btn-list">
+      <button onclick="location.href='https://soosoohan.github.io/trinkle/'">트링클</button>
+  </div></p>
 
-        <h3>📋 Game Rules</h3>
-        <ul>
-            <li>Two players take turns clicking tiles to find hidden words placed horizontally, vertically, or diagonally.</li>
-            <li>Whoever opens the last letter of a word claims it, and the player with the most words wins.</li>
-            <li>In addition to opening tiles, players can also type in their word guesses. If correct, all tiles of that word will be revealed.</li>
-            <li>🍀 If you find a clover, the four adjacent tiles (up, down, left, right) will open, and you get an extra turn.</li>
-            <li>🌼 If you find a daisy, all eight surrounding tiles will open, and you also get an extra turn.</li>
-<li>English word pools are categorized into A1, A2, B1, B2, and C1 levels,<br>
-  based on the CEFR system defined by the Oxford English Dictionary.<br>
-  </li>
-            
-Choose a word pool below to begin the game.</li>
-         </ul>
+  <p>
+    <strong>워퍼즈봇</strong>
+    똑똑해진 컴퓨터와 퍼즐 대결! 재미와 어휘력 두 마리 토끼 잡기 보장!<br>
+    <em>Worpuzz Bot:</em> Battle a smarter computer! Boost your vocabulary and enjoy the challenge!<br><div class="btn-list">
       
-    </div>
-    
-    <div class="credits-area chalk-text">
-        <div class="credits-item">
-            기획 · 개발: 한수수 
-        </div>
-        <div class="credits-item">
-            개발 보조 : 챗GPT 
-        </div>
-        <div class="credits-item">
-            코딩 도움:  클라우드
-        </div>
-        <div class="credits-item">
-            디자인 도움: 네이처 리        </div>
-        <div class="credits-item">
-            © 2025 한수수
-        </div>
-    </div>
-<!-- 한국어 게임 메뉴 -->
-<div class="game-menu" id="korean-menu">
-  <button class="main-game-button" onclick="startGame('k1', false)">사자성어/고사성어</button>
-  <button class="main-game-button" onclick="startGame('k2', false)">음성상징어(의태어/의성어)</button>
-  <button class="main-game-button" onclick="startGame('k3', false)">여행</button>
-  <button class="main-game-button" onclick="startGame('k4', false)">동물과 식물</button>
-  <button class="main-game-button" onclick="startGame('k5', false)">사자숙어</button>
+    <button onclick="location.href='https://soosoohan.github.io/worpuzz-bot/'">워퍼즈봇</button>
+  </div></p>
+<p>
+<strong>모음퀴즈</strong>
+    모음만 있는 문장에서 힌트를 보고 자음을 넣어  문장을 완성하는 게임 . 웃음 보장!<br>
+    <em>Moeum - Quiz:</em> A Korean puzzle game where vowels guide you to the answer!<br>
+    <div class="btn-list">
+      <button onclick="location.href='https://soosoohan.github.io/worpuzz-bot/'">모음 퀴즈</button>
+  </div></p>
+
+
+  <p>만든 사람: 한수수 <br>
+     ⓒ 2025 한수수. 이 게임의 저작권은 제작자 한수수에게 있으며,<br>
+     무단 복제, 배포, 2차 창작을 금합니다.<br>
+     Created by: Soosoo Han<br>
+     © 2025 Soosoo Han. All rights reserved.<br>
+     This game is the intellectual property of Soosoo Han.<br>
+     Unauthorized reproduction, distribution, or derivative works are prohibited.
+  </p>
 </div>
 
-<!-- 영어 게임 메뉴 -->
-<div class="game-menu hidden" id="english-menu">
-  <button class="main-game-button" onclick="startGame('e1', true)">A1 Oxford Beginner</button>
-  <button class="main-game-button" onclick="startGame('e2', true)">A2 Oxford Elementary</button>
-  <button class="main-game-button" onclick="startGame('e3', true)">B1 Oxford Intermediate</button>
-  <button class="main-game-button" onclick="startGame('e4', true)">B2 Oxford Upper-Intermediate</button>
-  <button class="main-game-button" onclick="startGame('e5', true)">C1 Oxford Advanced</button>
-  <button class="main-game-button" onclick="startGame('e6', true)">Tour</button>
-  <button class="main-game-button" onclick="startGame('e7', true)">Organism</button>
-  <button class="main-game-button" onclick="startGame('e8', true)">Onomatopoeia</button>
-  <button class="main-game-button" onclick="startGame('e9', true)">Mimetic Words</button>
-</div>
 
-    <div class="eraser"></div>
-    <div class="chalk-pieces">
-        <div class="chalk"></div>
-        <div class="chalk"></div>
-        <div class="chalk"></div>
-    </div>
-</div>
 
 <script>
-function toggleLanguage(lang) {
-    const isKorean = lang === 'ko';
-
-    // 설명 토글
-    document.getElementById('korean-description').classList.toggle('hidden', !isKorean);
-    document.getElementById('english-description').classList.toggle('hidden', isKorean);
-
-    // 버튼 토글
-    document.getElementById('korean-menu').classList.toggle('hidden', !isKorean);
-    document.getElementById('english-menu').classList.toggle('hidden', isKorean);
-
-    // 버튼 색상
-    const koBtn = document.querySelector('.language-button[onclick*="ko"]');
-    const enBtn = document.querySelector('.language-button[onclick*="en"]');
-
-    if (isKorean) {
-        koBtn.classList.add('active');
-        enBtn.classList.remove('active');
-    } else {
-        koBtn.classList.remove('active');
-        enBtn.classList.add('active');
-    }
-}
-function startGame(poolName, isEnglish) {
-    const page = isEnglish ? 'bot_eng.html' : 'bot_kor.html';
+  function startGame(poolName, isEnglish) {
+    const page = isEnglish ? 'game_eng.html' : 'game_kor.html';
     location.href = `${page}?pool=${poolName}`;
-}    
-
+  }
 </script>
-
-
 </body>
 </html>
