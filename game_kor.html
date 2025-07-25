@@ -369,10 +369,6 @@
 
 <div class="game-container">
 
-  <div class="start-section">
-    <button id="startBtn" class="game-button">게임 시작</button>
-  </div>
-
   <div id="gameSection" class="hidden">
     <div id="currentTurn"></div>
 
@@ -497,12 +493,19 @@ window.onload = () => {
         const count = data.wordCount[length] || 0;
         words.push(...getRandomSample(data.words[length], count));
       }
-      console.log('총 단어 수:', words.length);
-      console.log('단어 목록:', words);
-    })
-    .catch(err => {
-      document.body.innerHTML = '<p>❌ 워드풀 로딩 중 오류 발생: ' + err.message + '</p>';
-    });
+
+
+console.log('총 단어 수:', words.length);
+  console.log('단어 목록:', words);
+  
+  startGame(); // 여기에!
+})
+.catch(err => {
+  document.body.innerHTML = '<p>❌ 워드풀 로딩 중 오류 발생: ' + err.message + '</p>';
+});
+
+
+
 
   const gridSize = 10;
   const totalCells = gridSize * gridSize;
@@ -541,7 +544,6 @@ window.onload = () => {
     player2 = "플레이어2";
     
     gameSection.classList.remove('hidden');
-    startBtn.style.display = 'none';
     gameStarted = true;
     
     init();
@@ -682,7 +684,7 @@ window.onload = () => {
     do {
       // 초기화
       board = Array(totalCells).fill(null);
-      usedIndexes.clear();
+      usedIndexes.clear();		
       wordMap = {};
       
       // 모든 단어 배치 시도
@@ -916,7 +918,6 @@ window.onload = () => {
     init();
   }
 
-  startBtn.onclick = startGame;
   retryBtn.onclick = retry;
   guessBtn.onclick = handleGuess;
   guessInput.addEventListener('keypress', e => {
