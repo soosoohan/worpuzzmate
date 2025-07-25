@@ -186,7 +186,7 @@
   
   #game {
     display: grid;
-    grid-template-columns: repeat(12, clamp(35px, 6vw, 45px));
+    grid-template-columns: repeat(10, clamp(35px, 6vw, 45px));
     grid-gap: clamp(2px, 0.5vw, 4px);
     padding: 8px;
     border: 2px solid #333;
@@ -308,10 +308,6 @@
 
 <div class="game-container">
 
-  
-  <div class="start-section">
-    <button id="startBtn" class="game-button">START GAME</button>
-  </div>
 
   <div id="gameSection" class="hidden">
     <div id="currentTurn"></div>
@@ -395,12 +391,15 @@ window.onload = () => {
         const count = data.wordCount[length] || 0;
         words.push(...getRandomSample(data.words[length], count));
       }
-      console.log('총 단어 수:', words.length);
-      console.log('단어 목록:', words);
-    })
-    .catch(err => {
-      document.body.innerHTML = '<p>❌ 워드풀 로딩 중 오류 발생: ' + err.message + '</p>';
-    });
+        console.log('총 단어 수:', words.length);
+  console.log('단어 목록:', words);
+  
+  startGame(); // 여기에!
+})
+.catch(err => {
+  document.body.innerHTML = '<p>❌ 워드풀 로딩 중 오류 발생: ' + err.message + '</p>';
+});
+
 
   const gridSize = 12;
   const totalCells = gridSize * gridSize;
@@ -438,7 +437,6 @@ window.onload = () => {
      player1 = "플레이어1";
      player2 = "플레이어2";
     gameSection.classList.remove('hidden');
-    startBtn.style.display = 'none';
     gameStarted = true;
     
     init();
@@ -817,7 +815,6 @@ function isSafeForSpecial(idx) {
     init();
   }
 
-  startBtn.onclick = startGame;
   retryBtn.onclick = retry;
   guessBtn.onclick = handleGuess;
   guessInput.addEventListener('keypress', e => {
