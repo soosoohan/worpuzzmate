@@ -11,118 +11,294 @@
       gtag('config', 'G-4YZHC1G9FN');
     </script>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="format-detection" content="telephone=no" />
+
   <title>WORPUZZMATE</title>
   <style>
-    body {
-      font-family: 'Noto Sans KR', sans-serif;
-      background-color: #f0f8f7;
-      margin: 0;
-      padding: 20px;
-      color: #333;
-      text-align: center;
-    }
+          * {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    position: fixed;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f0f8f7;
+    color: #333;
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
     h1 {
-      font-size: 28px;
-      margin-bottom: 10px;
-      font-weight: bold;
-      color: #064d4d;
+    font-size: clamp(18px, 4vw, 24px);
+    margin: 5px 0;
+    font-weight: bold;
+    color: #064d4d;
+  }
+  
+  p {
+    font-size: clamp(12px, 2.5vw, 14px);
+    margin: 5px 0 15px 0;
+    color: #064d4d;
+  }
+  
+  .game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    max-width: 100vw;
+    overflow: hidden;
+  }
+  
+  .player-input input {
+    font-size: clamp(16px, 3vw, 18px);
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: clamp(120px, 30vw, 150px);
+    text-align: center;
+  }
+  
+  .start-section {
+    margin-bottom: 10px;
+  }
+  
+  .guess-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    padding: 0 10px;
+  }
+  
+  .guess-section input {
+    font-size: clamp(16px, 3vw, 18px);
+    padding: 6px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    width: clamp(150px, 40vw, 200px);
+    min-width: 150px;
+  }
+  
+  .game-area {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: clamp(8px, 2vw, 15px);
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
+  }
+  
+  .game-button {
+    font-size: clamp(14px, 3vw, 16px);
+    background-color: #c8f4ee;
+    padding: clamp(8px, 2vw, 10px) clamp(12px, 3vw, 18px);
+    margin: 4px;
+    color: #064d4d;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    touch-action: manipulation;
+    white-space: nowrap;
+  }
+  
+  .game-button:hover, .game-button:active {
+    background-color: #1d9e95;
+    transform: scale(1.02);
+  }
+  
+  .cell {
+    width: clamp(35px, 6vw, 45px);
+    height: clamp(35px, 6vw, 45px);
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(16px, 4vw, 22px);
+    cursor: pointer;
+    border: 1px solid #999;
+    touch-action: manipulation;
+  }
+  
+  .revealed { 
+    background-color: #fff; 
+  }
+  
+  .word-owned-player1 { 
+    background-color: #b7d5f2; 
+  }
+  
+  .word-owned-player2 { 
+    background-color: #f6c28b; 
+  }
+  
+  #player1Score, #player2Score {
+    width: clamp(120px, 20vw, 160px);
+    min-height: clamp(200px, 35vh, 300px);
+    max-height: 50vh;
+    padding: 8px;
+    font-size: clamp(12px, 2.5vw, 16px);
+    font-weight: bold;
+    border: 2px solid #333;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  #player1Score { 
+    background-color: #b7d5f2; 
+  }
+  
+  #player2Score { 
+    background-color: #f6c28b; 
+  }
+  
+  #currentTurn {
+    font-size: clamp(14px, 3vw, 18px);
+    margin: 8px;
+    color: #056762;
+    font-weight: bold;
+  }
+  
+  #game {
+    display: grid;
+    grid-template-columns: repeat(10, clamp(35px, 6vw, 45px));
+    grid-gap: clamp(2px, 0.5vw, 4px);
+    padding: 8px;
+    border: 2px solid #333;
+    background-color: #eee;
+    max-width: calc(100vw - 40px);
+    overflow: hidden;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .controls {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  
+  #wrongGuesses {
+    font-size: clamp(12px, 2.5vw, 14px);
+    margin: 5px 0;
+    padding: 0 10px;
+    word-wrap: break-word;
+  }
+  
+  /* 아이패드 세로 모드 최적화 */
+  @media screen and (max-width: 768px) and (orientation: portrait) {
+    body {
+      padding: 5px;
     }
-    p {
-      font-size: 14px;
-      margin-bottom: 20px;
-      color: #064d4d;
-    }
-    .game-container {
-      display: flex;
+    
+    .game-area {
       flex-direction: column;
       align-items: center;
-    }
-    .player-input input {
-      font-size: 20px;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      width: 150px;
-      text-align: center;
-    }
-    .start-section {
-      margin-bottom: 15px;
-    }
-    .guess-section {
-      display: flex;
-      justify-content: center;
       gap: 10px;
-      margin-bottom: 15px;
     }
-    .guess-section input {
-      font-size: 20px;
-      padding: 8px;
-      border: 1px solid #aaa;
-      border-radius: 4px;
-      width: 300px;
-    }
-    .game-area {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-    .game-button {
-      font-size: 18px;
-      background-color: #c8f4ee;
-      padding: 10px 22px;
-      margin: 8px;
-      color: #064d4d;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .game-button:hover {
-      background-color: #1d9e95;
-      transform: scale(1.05);
-    }
-    .cell {
-      width: 50px;
-      height: 50px;
-      background-color: #ddd;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 24px;
-      cursor: pointer;
-      user-select: none;
-      border: 1px solid #999;
-    }
-    .revealed { background-color: #fff; }
-    .word-owned-player1 { background-color: #b7d5f2; }
-    .word-owned-player2 { background-color: #f6c28b; }
+    
     #player1Score, #player2Score {
-      width: 160px;
-      min-height: 300px;
-      padding: 10px;
-      font-size: 20px;
-      font-weight: bold;
-      border: 2px solid #333;
+      width: 90vw;
+      min-height: 80px;
+      max-height: 100px;
+      display: flex;
+      flex-direction: column;
+      order: 3;
     }
-    #player1Score { background-color:  #b7d5f2; }
-    #player2Score { background-color: #f6c28b; }
-    #currentTurn {
-      font-size: 20px;
-      margin: 10px;
-      color: #056762;
-    }
+    
     #game {
-      display: grid;
-      grid-template-columns: repeat(12, 50px);
-      grid-gap: 5px;
-      padding: 10px;
-      border: 2px solid #333;
-      background-color: #eee;
+      order: 1;
+      margin-bottom: 10px;
     }
-    .hidden {
-      display: none;
+    
+    #currentTurn {
+      order: 2;
     }
-  </style>
+  }
+  
+  /* 아이패드 가로 모드 최적화 */
+  @media screen and (max-width: 1024px) and (orientation: landscape) {
+    .game-area {
+      gap: 8px;
+    }
+    
+    #player1Score, #player2Score {
+      width: clamp(100px, 15vw, 140px);
+      min-height: clamp(150px, 25vh, 250px);
+    }
+    
+    #game {
+      grid-template-columns: repeat(10, clamp(30px, 5vw, 40px));
+      grid-gap: clamp(1px, 0.3vw, 3px);
+    }
+    
+    .cell {
+      width: clamp(30px, 5vw, 40px);
+      height: clamp(30px, 5vw, 40px);
+      font-size: clamp(14px, 3vw, 18px);
+    }
+  }
+  
+  /* 작은 화면 (아이패드 미니 등) */
+  @media screen and (max-width: 600px) {
+    #game {
+      grid-template-columns: repeat(10, clamp(28px, 7vw, 35px));
+      grid-gap: 2px;
+      padding: 5px;
+    }
+    
+    .cell {
+      width: clamp(28px, 7vw, 35px);
+      height: clamp(28px, 7vw, 35px);
+      font-size: clamp(12px, 4vw, 16px);
+    }
+    
+    .game-button {
+      font-size: 12px;
+      padding: 6px 10px;
+    }
+  }
+  
+  /* 터치 최적화 */
+  @media (pointer: coarse) {
+    .cell {
+      cursor: default;
+    }
+    
+    .game-button {
+      cursor: default;
+    }
+  }
+</style>
 </head>
 
 <body>
@@ -166,6 +342,35 @@
 
 </div>
 <script>
+// 줌/스크롤 방지를 위한 이벤트 리스너
+document.addEventListener('touchmove', function(e) {
+  if (e.scale !== 1) {
+    e.preventDefault();
+  }
+}, { passive: false });
+
+document.addEventListener('gesturestart', function(e) {
+  e.preventDefault();
+});
+
+document.addEventListener('gesturechange', function(e) {
+  e.preventDefault();
+});
+
+document.addEventListener('gestureend', function(e) {
+  e.preventDefault();
+});
+
+// 더블탭 줌 방지
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function(event) {
+  const now = (new Date()).getTime();
+  if (now - lastTouchEnd <= 300) {
+    event.preventDefault();
+  }
+  lastTouchEnd = now;
+}, false);
+
 window.onload = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const poolFile = urlParams.get('pool');
@@ -288,8 +493,8 @@ window.onload = () => {
     }
     
     // 클로버/데이지 배치 (단어 영역 피하기)
-    placeDaisies(3);
-    placeClovers(7);
+    placeDaisies(9);
+    placeClovers(16);
     fillEmptyCells();
     updateScore();
     updateTurnDisplay();
