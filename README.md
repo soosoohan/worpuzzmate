@@ -74,16 +74,10 @@ Redesigned the original game with pastel colors and uploaded it to ['worpuzz'](h
 
 
 - 기획·개발 : 한수수  
-- 개발 보조 : 주주, 콕슨
-- 디자인 도움: 네이처 리
-
 <p>ⓒ 2025 한수수. 이 게임의 모든 권리는 제작자인 한수수에게 있습니다.<br>
  무단 복제, 배포, 2차 창작을 금합니다.</p>
 
 - Created and Developed by Soosoo Han  
-- Development Assistant: Juju, Coxon 
-- Design Support: Nature Lee
-
 <p>© 2025 Soosoo Han. All rights reserved.<br>
     No part of this game may be copied, distributed, or modified without permission.</p>
 
