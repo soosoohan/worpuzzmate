@@ -2,7 +2,7 @@
 
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4YZHC1G9FN"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -10,8 +10,8 @@
       gtag('js', new Date());
       gtag('config', 'G-4YZHC1G9FN');
     </script>
-<meta charset="UTF-8" />
-  <title>워퍼즈메이트인덱스</title>
+  <meta charset="UTF-8" />
+  <title>워퍼즈메이트</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -103,6 +103,7 @@ h1 {
     margin-top: 5px;
 }
 
+
 .row-container {
   display: flex;
   justify-content: center;
@@ -113,6 +114,7 @@ h1 {
   flex-wrap: wrap;
   padding: 0 40px;
 }
+
 
 .column {
   flex: 1 1 300px;
@@ -167,11 +169,45 @@ h1 {
     background-color: #FF9494;
     color: white;
 }
+       
+.square-button {
+            width: 250px;
+            height: 45px;
+            background-color:#a1e6dd; /* 연분홍 */
+            color: white;
+            border: none;
+            border-radius: 12px; /* 둥근 모서리 */
+            cursor: pointer;
+            font-size: 1.1rem; /*크기 고정 */
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            line-height: 1.2;
+            margin: 8px;
+            transition: all 0.3s ease;
+            font-family: Arial, sans-serif;
+        }
 
+    .square-button:hover {
+        background-color: #FF8FAB; /* 호버 시 진한 분홍 */
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .square-button:active {
+        transform: scale(0.95);
+    }
 .credits {
-  margin-top: 50px;
-  font-size: clamp(0.95rem, 2.2vw, 1.15rem);
-  color: #05676e;
+        margin-top: 50px;
+        font-size: 0.9em;
+        color: #A65A5A;
+        background-color: #f0f8f7;
+        padding: 20px;
+        border-radius: 10px;
+        width: 300px;
+        justify-content: center;
 }
 
 /* 단계별 컨테이너 숨김/표시 */
@@ -213,25 +249,13 @@ h1 {
     color: white;
 }
 
-.susu-button {
-    margin-top: 30px;
-    padding: 15px 25px;
-    font-size: clamp(1rem, 3vw, 1.3rem);
-    font-weight: bold;
-    background: linear-gradient(145deg, #FFD6BA, #FFCAA6);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.susu-button:hover {
-    background: linear-gradient(145deg, #FF9494, #FF7373);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(255, 148, 148, 0.3);
+@media (max-width: 768px) {
+  .row-container {
+    flex-direction: column;
+    align-items: center; /* 세로 배치일 때는 중앙 정렬이 보통 더 좋습니다 */
+    gap: 30px; /* 모바일에서는 간격을 줄일 수도 있습니다 */
+    padding: 0 20px; /* 모바일에서는 패딩도 줄이는 것이 좋습니다 */
+  }
 }
 
 
@@ -261,19 +285,18 @@ h1 {
             </button>
             <button class="selection-button" onclick="location.href='https://zzini.vercel.app'">
                 <span class="emoji">🎪</span>
-                워퍼즈메이트찌니
+                워퍼즈메이트라지
                 <div class="subtitle">영어 19×12, 한글 17×10</div>
             </button>
         </div>
     </div>
-<button class="susu-button" onclick="location.href='https://soosoohan.github.io/soosooland/'">
-        재미있게<br>공부하는<br>수수랜드
-    </button>
-<div class="credits">
-    © 2025 Soosoo Han.<br>
-      All rights reserved.<br>
-    </p>
-</div>
+
+<div class="credits">       
+<button class="square-button" onclick="location.href='https://soosoohan.github.io/soosooland/'">
+    재미있게 공부하는 수수랜드
+</button>
+<p> © 2025 Soosoo Han. All rights reserved.</p>
+    </div>
   
 </div>
 <!-- 2단계: 게임 선택 -->
@@ -306,6 +329,18 @@ h1 {
     <div class="row-container">
         <!-- 왼쪽: ENGLISH -->
         <div class="column">
+            <h2>KOREAN</h2>
+            <div class="btn-list">
+                <button onclick="startGame('k1', false)">사자성어/고사성어</button>
+                <button onclick="startGame('k2', false)">음성상징어(의태어/의성어)</button>
+                <button onclick="startGame('k3', false)">여행</button>
+                <button onclick="startGame('k4', false)">동물과 식물</button>
+                <button onclick="startGame('k5', false)">사자숙어</button>
+            </div>
+        </div>
+
+        <!-- 오른쪽: KOREAN -->
+        <div class="column">
             <h2>ENGLISH</h2>
             <div class="btn-list">
                 <button onclick="startGame('e1', true)">A1 Oxford Beginner</button>
@@ -315,18 +350,6 @@ h1 {
                 <button onclick="startGame('e5', true)">C1 Oxford Advanced</button>
                 <button onclick="startGame('e6', true)">Tour</button>
                 <button onclick="startGame('e7', true)">Organism</button>
-            </div>
-        </div>
-
-        <!-- 오른쪽: KOREAN -->
-        <div class="column">
-            <h2>KOREAN</h2>
-            <div class="btn-list">
-                <button onclick="startGame('k1', false)">사자성어/고사성어</button>
-                <button onclick="startGame('k2', false)">음성상징어(의태어/의성어)</button>
-                <button onclick="startGame('k3', false)">여행</button>
-                <button onclick="startGame('k4', false)">동물과 식물</button>
-                <button onclick="startGame('k5', false)">사자숙어</button>
             </div>
         </div>
 
@@ -364,7 +387,7 @@ h1 {
         if (size === 'normal') {
             showStep(2);
         }
-        // 'zzini'의 경우 다른 사이트로 이동 (이미 버튼에 onclick으로 처리됨)
+        // 'large'의 경우 다른 사이트로 이동 (이미 버튼에 onclick으로 처리됨)
     }
     
     function goBack() {
