@@ -302,12 +302,12 @@
 
 
 <div class="guess-section">
-  <input type="text" id="guessInput" placeholder="YOUR GUESS(UPPERCASE)" />
-  <button id="guessBtn" class="game-button">SUBMIT</button>
+  <input type="text" id="guessInput" placeholder="추측한 단어를 적으세요" />
+  <button id="guessBtn" class="game-button">제출</button>
 </div>
 
 <div id="wrongGuesses" style="display: none;">
-  <strong>Invalid words:</strong> <span id="wrongList"></span>
+  <strong>틀린 추측:</strong> <span id="wrongList"></span>
 </div>
 
 <div class="game-area">
@@ -317,8 +317,8 @@
 </div>
 
 <div class="controls">
-  <button id="retryBtn" class="game-button">RETRY</button>
-  <button onclick="location.href='index.html'" class="game-button">HOME</button>
+  <button id="retryBtn" class="game-button">재시작</button>
+  <button onclick="location.href='index.html'" class="game-button">홈으로</button>
 </div>
 
 
@@ -382,7 +382,7 @@ window.onload = () => {
   const poolFile = urlParams.get('pool');
   if (!poolFile) {
     // 임시로 기본 단어들 설정
-  words = ['CAT', 'GAME', 'PLAY', 'WORD', 'PUZZLE', 'FIND', 'CLICK', 'DOG'];
+  words = ['이차선다리', '고양이', '양화대교', '시크릿가든', '퍼즐', '게임', '수수랜드', '강아지'];
     gameSection.classList.remove('hidden');
     init();
     return;
@@ -444,8 +444,8 @@ window.onload = () => {
   }
 
    function startGame() {
-     player1 = "player1";
-     player2 = "player2";
+     player1 = "플레이어1";
+     player2 = "플레이어2";
     gameSection.classList.remove('hidden');
     gameStarted = true;
     
@@ -736,7 +736,7 @@ function isSafeForSpecial(idx) {
   function updateTurnDisplay() {
     if (!gameStarted) return;
     currentPlayerName = currentPlayer === 'player1' ? player1 : player2;
-    currentTurnEl.textContent = `It is ${currentPlayerName}'s turn.`;
+    currentTurnEl.textContent = ` ${currentPlayerName}'의 차례입니다.`;
   }
 
   function switchTurn(extra) {
