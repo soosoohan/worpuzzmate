@@ -158,9 +158,8 @@
   }
   
   #player1Score, #player2Score {
-    width: clamp(120px, 20vw, 160px);
-    min-height: clamp(200px, 35vh, 300px);
-    max-height: 50vh;
+    width: 180px;
+    height: 480px;
     padding: 8px;
     font-size: clamp(12px, 2.5vw, 16px);
     font-weight: bold;
@@ -191,7 +190,8 @@
     padding: 8px;
     border: 2px solid #333;
     background-color: #eee;
-    max-width: calc(100vw - 40px);
+    width: 480px;
+    height:480px;
     overflow: hidden;
   }
   
@@ -228,9 +228,8 @@
     }
     
     #player1Score, #player2Score {
-      width: 90vw;
-      min-height: 80px;
-      max-height: 100px;
+      width: 480px;
+      height: auto;
       display: flex;
       flex-direction: column;
       order: 3;
@@ -247,58 +246,17 @@
   }
   
   /* 아이패드 가로 모드 최적화 */
-  @media screen and (max-width: 1024px) and (orientation: landscape) {
+  @media screen and (max-width: 940px) and (orientation: landscape) {
     .game-area {
       gap: 8px;
     }
     
     #player1Score, #player2Score {
-      width: clamp(100px, 15vw, 140px);
-      min-height: clamp(150px, 25vh, 250px);
+      width: 480px;
+      height: auto;
     }
-    
-    #game {
-      grid-template-columns: repeat(10, clamp(30px, 5vw, 40px));
-      grid-gap: clamp(1px, 0.3vw, 3px);
     }
-    
-    .cell {
-      width: clamp(30px, 5vw, 40px);
-      height: clamp(30px, 5vw, 40px);
-      font-size: clamp(14px, 3vw, 18px);
-    }
-  }
   
-  /* 작은 화면 (아이패드 미니 등) */
-  @media screen and (max-width: 600px) {
-    #game {
-      grid-template-columns: repeat(10, clamp(28px, 7vw, 35px));
-      grid-gap: 2px;
-      padding: 5px;
-    }
-    
-    .cell {
-      width: clamp(28px, 7vw, 35px);
-      height: clamp(28px, 7vw, 35px);
-      font-size: clamp(12px, 4vw, 16px);
-    }
-    
-    .game-button {
-      font-size: 12px;
-      padding: 6px 10px;
-    }
-  }
-  
-  /* 터치 최적화 */
-  @media (pointer: coarse) {
-    .cell {
-      cursor: default;
-    }
-    
-    .game-button {
-      cursor: default;
-    }
-  }
 </style>
 </head>
 
