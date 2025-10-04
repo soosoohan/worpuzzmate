@@ -187,8 +187,9 @@
   
   #game {
     display: grid;
-    grid-template-columns: repeat(12, clamp(35px, 6vw, 45px));
-    grid-gap: clamp(2px, 0.5vw, 4px);
+    grid-template-columns: repeat(12,1fr);
+    grid-template-rows:repeat(12,1fr);
+    grid-gap: 4px;
     padding: 8px;
     border: 2px solid #333;
     background-color: #eee;
