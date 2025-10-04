@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="ko">
+<html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4YZHC1G9FN"></script>
@@ -15,9 +15,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="format-detection" content="telephone=no" />
-    <title>워퍼즈메이트한글</title>
-    <style>
-      * {
+
+  <title>워퍼즈메이트한글</title>
+  <style>
+          * {
         box-sizing: border-box;
         -webkit-tap-highlight-color: transparent;
         -webkit-touch-callout: none;
@@ -48,7 +49,7 @@
     flex-direction: column;
     min-height: 100vh;
   }
-      .screen-warning {
+     .screen-warning {
       display: none;
       text-align: center;
       padding: 40px;
@@ -69,8 +70,7 @@
       color: #666;
       line-height: 1.6;
     }
-    
-  h1 {
+   h1 {
     font-size: clamp(18px, 4vw, 24px);
     margin: 5px 0;
     font-weight: bold;
@@ -78,7 +78,7 @@
   }
   
   p {
-    font-size: clamp(18px,4vw, 24px);
+    font-size: clamp(18px, 4vw, 24px);
     margin: 5px 0 15px 0;
     color: #064d4d;
   }
@@ -154,13 +154,13 @@
   }
   
   .cell {
-    width: clamp(35px, 6vw, 50px);
-    height: clamp(35px, 6vw, 50px);
+    width: 100%;
+    height: 100%;
     background-color: #ddd;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: clamp(16px, 4vw, 24px);
+    font-size: 1.5em;
     cursor: pointer;
     border: 1px solid #999;
     touch-action: manipulation;
@@ -168,6 +168,8 @@
   
   .revealed { 
     background-color: #fff; 
+   font-size: 1.5em;
+ 
   }
   
   .word-owned-player1 { 
@@ -179,10 +181,10 @@
   }
   
   #player1Score, #player2Score {
-    width: 120px;
-    height: 500px;
+    width: 180px;
+    height: 480px;
     padding: 8px;
-    font-size: clamp(12px, 2.5vw, 16px);
+    font-size: 1.2em;
     font-weight: bold;
     border: 2px solid #333;
     overflow-y: auto;
@@ -206,13 +208,14 @@
   
   #game {
     display: grid;
-    grid-template-columns: repeat(10,1fr));
-    grid-gap: clamp(2px, 0.5vw, 5px);
+    grid-template-columns: repeat(10,1fr);
+    grid-template-rows:repeat(10,1fr);
+    grid-gap: 4px;
     padding: 8px;
     border: 2px solid #333;
     background-color: #eee;
-    width: 500px;
-    overflow: hidden;
+    width: 480px;
+    height:480px;
   }
   
   .hidden {
@@ -235,55 +238,8 @@
   }
 .inline { display: inline; }
   
-  /* 큰 화면 (데스크톱 모니터) 최적화 */
-  @media screen and (min-width: 1025px) {
-    body {
-      padding: 20px;
-    }
-    
-    h1 {
-      font-size: 28px;
-      margin: 10px 0;
-    }
-    
-    p {
-      font-size: 16px;
-      margin: 10px 0 20px 0;
-    }
-    
-    .game-button {
-      font-size: 18px;
-      padding: 12px 20px;
-      margin: 8px;
-    }
-        
-    #player1Score, #player2Score {
-      width: 120px;
-      min-height: 500px;
-      max-height: none;
-      padding: 12px;
-      font-size: 18px;
-    }
-    
-    #currentTurn {
-      font-size: 22px;
-      margin: 15px;
-    }
-    
-    .guess-section input {
-      font-size: 20px;
-      padding: 8px;
-      width: 220px;
-    }
-    
-    .game-area {
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-  }
-  
   /* 아이패드 세로 모드 최적화 */
-  @media screen and (max-width: 760px) and (orientation: portrait) {
+  @media screen and (max-width: 768px) and (orientation: portrait) {
     body {
       padding: 5px;
     }
@@ -295,9 +251,8 @@
     }
     
     #player1Score, #player2Score {
-      width: 500px;
-      min-height: 80px;
-      max-height: 100px;
+      width: 480px;
+      height: auto;
       display: flex;
       flex-direction: column;
       order: 3;
@@ -310,12 +265,22 @@
     
     #currentTurn {
       order: 2;
-    }
+    } 
   }
   
+  /* 아이패드 가로 모드 최적화 */
+  @media screen and (max-width: 940px) and (orientation: landscape) {
+    .game-area {
+      gap: 8px;
+    }
+    
+    #player1Score, #player2Score {
+      width: 480px;
+      height: auto;
+    }
+    }
+  
 </style>
-
-
 </head>
 
 <body>
@@ -325,6 +290,7 @@
     <p>This game requires a minimum screen width of 500px and is designed for two players.</p>
     <p>Please use a tablet or desktop computer to play.</p>
   </div>
+  
 
 <h1 id="game-title" class="inline">게임 제목</h1>
 <p id="game-desc" class="inline">게임 설명</p>
@@ -336,12 +302,12 @@
 
 
 <div class="guess-section">
-  <input type="text" id="guessInput" placeholder="추측한 단어" />
-  <button id="guessBtn" class="game-button">제출</button>
+  <input type="text" id="guessInput" placeholder="YOUR GUESS(UPPERCASE)" />
+  <button id="guessBtn" class="game-button">SUBMIT</button>
 </div>
 
 <div id="wrongGuesses" style="display: none;">
-  <strong>없는 단어:</strong> <span id="wrongList"></span>
+  <strong>Invalid words:</strong> <span id="wrongList"></span>
 </div>
 
 <div class="game-area">
@@ -351,21 +317,20 @@
 </div>
 
 <div class="controls">
-  <button id="retryBtn" class="game-button">다시 하기</button>
-  <button onclick="location.href='index.html'" class="game-button">초기 화면</button>
+  <button id="retryBtn" class="game-button">RETRY</button>
+  <button onclick="location.href='index.html'" class="game-button">HOME</button>
 </div>
 
 
   </div>
 
 </div>
-
 <script>
 function checkScreenSize() {
   const warning = document.getElementById('warning');
   const body = document.body;
   
-  if (window.innerWidth < 520) {
+  if (window.innerWidth < 500) {
     warning.style.display = 'block';
     document.getElementById('game-title').style.display = 'none';
     document.getElementById('game-desc').style.display = 'none';
@@ -377,16 +342,13 @@ function checkScreenSize() {
     document.querySelector('.game-container').style.display = 'flex';
   }
 }
-  // 페이지 로드 시 체크
+    
+    // 페이지 로드 시 체크
     checkScreenSize();
     
     // 화면 크기 변경 시 체크
     window.addEventListener('resize', checkScreenSize);
-  
-// 페이지 로드 시 모바일 감지 실행
-const redirected = detectMobileAndRedirect();
-
-// 줌/스크롤 방지를 위한 이벤트 리스너
+  // 줌/스크롤 방지를 위한 이벤트 리스너
 document.addEventListener('touchmove', function(e) {
   if (e.scale !== 1) {
     e.preventDefault();
@@ -416,14 +378,11 @@ document.addEventListener('touchend', function(event) {
 }, false);
 
 window.onload = () => {
-  // 리다이렉트가 발생했다면 게임 로딩을 중단
-  if (redirected) return;
-  
   const urlParams = new URLSearchParams(window.location.search);
   const poolFile = urlParams.get('pool');
   if (!poolFile) {
     // 임시로 기본 단어들 설정
-    words = ['양화대교', '서울특별시', '게임', '클릭', '보라매공원', '고양이'];
+  words = ['CAT', 'GAME', 'PLAY', 'WORD', 'PUZZLE', 'FIND', 'CLICK', 'DOG'];
     gameSection.classList.remove('hidden');
     init();
     return;
@@ -435,16 +394,14 @@ window.onload = () => {
       document.getElementById('game-title').textContent = data.title || '게임 제목';
       const rawText = data.description || '게임 설명';
       const htmlText = rawText.replace(/\n/g, '<br>');
-      document.getElementById('game-desc').innerHTML = htmlText;
+      document.getElementById('game-desc').innerHTML = htmlText; // innerHTML로 변경
 
       words = [];
       for (let length in data.words) {
         const count = data.wordCount[length] || 0;
         words.push(...getRandomSample(data.words[length], count));
       }
-
-
-console.log('총 단어 수:', words.length);
+        console.log('총 단어 수:', words.length);
   console.log('단어 목록:', words);
   
   startGame(); // 여기에!
@@ -452,8 +409,6 @@ console.log('총 단어 수:', words.length);
 .catch(err => {
   document.body.innerHTML = '<p>❌ 워드풀 로딩 중 오류 발생: ' + err.message + '</p>';
 });
-
-
 
 
   const gridSize = 10;
@@ -488,10 +443,9 @@ console.log('총 단어 수:', words.length);
     return shuffled.slice(0, count);
   }
 
-  function startGame() {
-    player1 = "플레이어1";
-    player2 = "플레이어2";
-    
+   function startGame() {
+     player1 = "player1";
+     player2 = "player2";
     gameSection.classList.remove('hidden');
     gameStarted = true;
     
@@ -547,8 +501,8 @@ console.log('총 단어 수:', words.length);
     }
     
     // 클로버/데이지 배치 (단어 영역 피하기)
-    placeDaisies(6);
-    placeClovers(10);
+    placeDaisies(9);
+    placeClovers(16);
     fillEmptyCells();
     updateScore();
     updateTurnDisplay();
@@ -578,13 +532,16 @@ console.log('총 단어 수:', words.length);
     
     // 방향을 무작위로 섞어서 더 다양한 배치
     const shuffledDirections = directions.sort(() => Math.random() - 0.5);
-
+   
     for (let dir of shuffledDirections) {
-      const startY = Math.floor(Math.random() * gridSize);
-      for (let i = 0; i < gridSize; i++) {
-        const y = (startY + i) % gridSize;
-        for (let x = 0; x < gridSize; x++) {
-          if (canPlaceWord(word, x, y, dir.x, dir.y)) {
+const startY = Math.floor(Math.random() * gridSize);
+for (let i = 0; i < gridSize; i++) {
+  const y = (startY + i) % gridSize;
+  for (let x = 0; x < gridSize; x++) {
+
+          
+
+if (canPlaceWord(word, x, y, dir.x, dir.y)) {
             let positions = [];
             for (let i = 0; i < word.length; i++) {
               let nx = x + dir.x * i, ny = y + dir.y * i, idx = ny * gridSize + nx;
@@ -594,7 +551,7 @@ console.log('총 단어 수:', words.length);
             }
             wordMap[word] = {
               positions: positions,
-              direction: [dir.x, dir.y]
+              direction: [dir.x, dir.y] // 방향 정보 저장
             };
             return true;
           }
@@ -633,7 +590,7 @@ console.log('총 단어 수:', words.length);
     do {
       // 초기화
       board = Array(totalCells).fill(null);
-      usedIndexes.clear();		
+      usedIndexes.clear();
       wordMap = {};
       
       // 모든 단어 배치 시도
@@ -667,7 +624,9 @@ console.log('총 단어 수:', words.length);
       const idx = Math.floor(Math.random() * totalCells);
       if (!usedIndexes.has(idx) && !clovers.has(idx) && !daisies.has(idx)) {
         // 주변에 단어가 없는지 확인
-        if (isSafeForSpecial(idx)) {
+        
+
+if (isSafeForSpecial(idx)) {
           clovers.add(idx);
           placed++;
         }
@@ -693,29 +652,28 @@ console.log('총 단어 수:', words.length);
     }
     console.log('배치된 데이지 수:', daisies.size);
   }
-
-  function isSafeForSpecial(idx) {
-    const x = idx % gridSize;
-    const y = Math.floor(idx / gridSize);
-    
-    // 주변 8칸에 다른 아이템이 있는지만 확인 (단어는 상관없음)
-    for (let dy = -1; dy <= 1; dy++) {
-      for (let dx = -1; dx <= 1; dx++) {
-        if (dx === 0 && dy === 0) continue;
-        const nx = x + dx;
-        const ny = y + dy;
-        if (nx >= 0 && nx < gridSize && ny >= 0 && ny < gridSize) {
-          const nIdx = ny * gridSize + nx;
-          if (clovers.has(nIdx) || daisies.has(nIdx)) {
-            return false;
-          }
+function isSafeForSpecial(idx) {
+  const x = idx % gridSize;
+  const y = Math.floor(idx / gridSize);
+  
+  // 주변 8칸에 다른 아이템이 있는지만 확인 (단어는 상관없음)
+  for (let dy = -1; dy <= 1; dy++) {
+    for (let dx = -1; dx <= 1; dx++) {
+      if (dx === 0 && dy === 0) continue;
+      const nx = x + dx;
+      const ny = y + dy;
+      if (nx >= 0 && nx < gridSize && ny >= 0 && ny < gridSize) {
+        const nIdx = ny * gridSize + nx;
+        if (clovers.has(nIdx) || daisies.has(nIdx)) {
+          return false;
         }
       }
     }
-    return true;
   }
+  return true;
+}
 
-  function fillEmptyCells() {
+ function fillEmptyCells() {
     const filler = '같갛개거건걸것게고괴교국궁그근금기긴까깜깨꺾껴꼼꽁꾸끔난내넘넣네놀놈누뉴는니님다닥대댄더던덩데도동두드득든듣들등디딜딱때땡똑뚫뛰라락란람랐랑래랜러레려력렸로롭르른를리린림마만맛맞맨머먼멀메멘며몰무묻뭘미민바받방버벅번봐봤부붙브블비빈빌빔빠빡빨빼뻥사새생서섭섰세숙쉬슴실싶쌍쓰씌씻아악알았애야어엄업없었엉에여열옛오온올와왔왜우울원위유윤으을음의익인잃있잊작잖잘저전제져좋주줬짜짝찍차착참창채척천청체쳤초출췄취치친카켜코콜크테토트튼폭핀하학한할해햄했행현호혼화환히'.split('');
     shuffle(filler);
     let i = 0;
@@ -778,7 +736,7 @@ console.log('총 단어 수:', words.length);
   function updateTurnDisplay() {
     if (!gameStarted) return;
     currentPlayerName = currentPlayer === 'player1' ? player1 : player2;
-    currentTurnEl.textContent = `${currentPlayerName}님의 차례입니다`;
+    currentTurnEl.textContent = `It is ${currentPlayerName}'s turn.`;
   }
 
   function switchTurn(extra) {
@@ -804,7 +762,7 @@ console.log('총 단어 수:', words.length);
   function checkWords() {
     for (let word of Object.keys(wordMap)) {
       if (foundWords.has(word)) continue;
-      const pos = wordMap[word].positions;
+      const pos = wordMap[word].positions; // .positions 추가
       if (pos.every(i => revealed[i])) {
         foundWords.add(word);
         foundBy[currentPlayer].push(word);
@@ -823,7 +781,7 @@ console.log('총 단어 수:', words.length);
       resultShown = true;
       
       setTimeout(() => {
-        alert("게임 종료!");
+        alert("game over!");
       }, 500);
     }
   } 
@@ -836,12 +794,11 @@ console.log('총 단어 수:', words.length);
     if (!guess || foundWords.has(guess)) return;
     
     if (wordMap[guess]) {
-      const pos = wordMap[guess].positions;
+      const pos = wordMap[guess].positions; // .positions 추가
       pos.forEach(i => {
         if (!revealed[i]) reveal(i);
       });
-
-     foundWords.add(guess);
+      foundWords.add(guess);
       foundBy[currentPlayer].push(guess);
       pos.forEach(i => {
         const cell = gameEl.children[i];
