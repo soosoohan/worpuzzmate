@@ -736,7 +736,7 @@ function isSafeForSpecial(idx) {
   function updateTurnDisplay() {
     if (!gameStarted) return;
     currentPlayerName = currentPlayer === 'player1' ? player1 : player2;
-    currentTurnEl.textContent = ` ${currentPlayerName}'의 차례입니다.`;
+    currentTurnEl.textContent = ` ${currentPlayerName}의 차례입니다.`;
   }
 
   function switchTurn(extra) {
