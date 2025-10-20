@@ -44,7 +44,7 @@ Inspired by Minesweeper, it challenges players to uncover hidden words on a tile
 
 - **2025-05-01**
  
-오랫동안 생각만 했던 아이디어를 직접 구현해보기로 결심하고 개발을 시작함
+오랫동안 생각만 했던 아이디어를 직접 구현해보기로 결심하고 개발을 시작함.  
 Decided to turn a long-time idea into reality and began development.
 
 - **2025-05-31**  
