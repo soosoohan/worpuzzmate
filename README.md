@@ -58,7 +58,7 @@ First prototype completed and uploaded
 Created a two-player competitive version of Worpuzz called WorpuzzMate and uploaded it to 'worpuzzmate'.  
 
 ---
-워퍼즈메이트 주소 : http://soosooland.com/worpuzzmate
+워퍼즈메이트 주소 : http://soosooland.com/worpuzzmate/
 
 ## 🌟 Soosooland - Game Hub by Han Soosoo
 
