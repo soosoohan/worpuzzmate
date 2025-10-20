@@ -60,7 +60,7 @@ Created a two-player competitive version of Worpuzz called WorpuzzMate and uploa
 ---
 워퍼즈메이트 주소 : http://soosooland.com/worpuzzmate
 
-## 🌟 Soosooland - Game Demo Hub by Han Soosoo
+## 🌟 Soosooland - Game Hub by Han Soosoo
 
  "Learning through fun, and fun through learning."
 
