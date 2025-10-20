@@ -50,16 +50,16 @@ Began development with the help of ChatGPT, turning a long-held idea into a play
 - **2025-05-31**  
 내가 만든 첫번째 컴퓨터 게임 워퍼즈 탄생  
 The Birth of Worpuzz — My Very First Computer Game  
-워퍼즈는 컴퓨터와 대결하는 형태로 완성 후 ['/worpuzz-legacy/](http://soosoohan.github.io/worpuzz-legacy) 레포에 업로드.  
-First prototype completed and uploaded to the ['/worpuzz-legacy/](http://soosoohan.github.io/worpuzz-legacy) repository.
+워퍼즈는 컴퓨터와 대결하는 형태로 완성 후 '/worpuzz-legacy/'레포에 업로드.  
+First prototype completed and uploaded to the '/worpuzz-legacy/ repository.
 
 - **2025-06-14**  
-두 사용자가 대결하는 형태의 워퍼즈메이트를 만들어 ['worpuzzmate'](http://soosoohan.github.io/worpuzzmate)에 업로드함.  
-Created a two-player competitive version of Worpuzz called WorpuzzMate and uploaded it to ['worpuzzmate'](http://soosoohan.github.io/worpuzzmate).  
+두 사용자가 대결하는 형태의 워퍼즈메이트를 만들어 'worpuzzmate'에 업로드함.  
+Created a two-player competitive version of Worpuzz called WorpuzzMate and uploaded it to 'worpuzzmate'.  
 
 - **2025-06-17**  
-컴퓨터와 대결하는 기존 게임을 파스텔 컬러로 리디자인하여 ['worpuzz'](http://soosoohan.github.io/worpuzz)에 업로드함.  
-Redesigned the original game with pastel colors and uploaded it to ['worpuzz'](http://soosoohan.github.io/worpuzz).
+컴퓨터와 대결하는 기존 게임을 파스텔 컬러로 리디자인하여 'worpuzz'에 업로드함.  
+Redesigned the original game with pastel colors and uploaded it to 'worpuzz'.
 
 
 ---
@@ -68,7 +68,7 @@ Redesigned the original game with pastel colors and uploaded it to ['worpuzz'](h
 
  "Learning through fun, and fun through learning."
 
-Explore more brain games and puzzles in **[Soosooland](https://soosoohan.github.io/soosooland/)**    
+Explore more brain games and puzzles in **[Soosooland](https://soosooland.com/)**    
 — a digital playground designed to improve memory, logic, and creativity while having fun!
 
 ---
