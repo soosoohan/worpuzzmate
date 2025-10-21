@@ -40,25 +40,8 @@ Inspired by Minesweeper, it challenges players to uncover hidden words on a tile
 
 ---
 
-### 📅 개발 타임라인 / Development Timeline
-
-- **2025-05-01**
- 
-오랫동안 생각만 했던 아이디어를 직접 구현해보기로 결심하고 개발을 시작함.  
-Decided to turn a long-time idea into reality and began development.
-
-- **2025-05-31**  
-내가 만든 첫번째 컴퓨터 게임 워퍼즈 탄생  
-The Birth of Worpuzz — My Very First Computer Game  
-워퍼즈는 컴퓨터와 대결하는 형태로 완성 후  업로드.  
-First prototype completed and uploaded
-
-- **2025-06-14**  
-두 사용자가 대결하는 형태의 워퍼즈메이트를 만들어 'worpuzzmate'에 업로드함.  
-Created a two-player competitive version of Worpuzz called WorpuzzMate and uploaded it to 'worpuzzmate'.  
-
 ---
-워퍼즈메이트 주소 : http://soosooland.com/worpuzzmate/
+## 워퍼즈메이트 주소 : http://soosooland.com/worpuzzmate/
 
 ## 🌟 Soosooland - Game Hub by Han Soosoo
 
