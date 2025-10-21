@@ -40,8 +40,8 @@ Inspired by Minesweeper, it challenges players to uncover hidden words on a tile
 
 ---
 
----
 ## 워퍼즈메이트 주소 : http://soosooland.com/worpuzzmate/
+---
 
 ## 🌟 Soosooland - Game Hub by Han Soosoo
 
