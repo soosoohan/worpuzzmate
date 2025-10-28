@@ -70,9 +70,7 @@ We plan to develop games with more diverse topics and in various languages such 
   
 ### 📌 격자 크기와 게임 종류
 
-| 격자 크기       | 👤🆚🤖    | 👤🆚👤 |
-| grid size     |컴퓨터와 대결   |사용자 2인 대결 |
-
+| 격자 크기 grid size       | 👤🆚🤖 컴퓨터와 대결   | 👤🆚👤 사용자 2인 대결 |
 |------------------|--------------|----------------|
 |small  영 8x8 한 7x7  | 워퍼즈미니         |        -    |
 |medium  영 12x12 한 10x10    | 워퍼즈   | 워퍼즈 메이트    |
