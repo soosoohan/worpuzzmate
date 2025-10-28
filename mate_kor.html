@@ -87,7 +87,26 @@
       color: #666;
       line-height: 1.6;
     }
-   h1 {
+ .back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 8px 10px;      /* 모바일 기본 */
+    font-size: 1.5em;
+    font-weight: bold;
+    background-color: #CFF9FF;
+    color: #0A6A79;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+.back-button:hover {
+    background-color: #1baf8f;
+    color: #fff;
+}
+  h1 {
     font-size: clamp(18px, 4vw, 24px);
     font-weight: bold;
     color: #064d4d;
@@ -300,8 +319,7 @@
 </head>
 
 <body>
-  
-  <div class="screen-warning" id="warning">
+    <div class="screen-warning" id="warning">
     <h2>Screen Too Small</h2>
     <p>This game requires a minimum screen width of 500px and is designed for two players.</p>
     <p>Please use a tablet or desktop computer to play.</p>
@@ -309,7 +327,7 @@
     <p>타블렛이나 데스크탑을 이용하세요.</p>
   </div>
   
-
+<button class="back-button"  onclick="location.href='index.html'">←</button>
 <h1 id="game-title">게임 제목</h1>
 <p id="game-desc">게임 설명</p>
 
@@ -322,6 +340,7 @@
 <div class="guess-section">
   <input type="text" id="guessInput" placeholder="추측한 단어를 적으세요" />
   <button id="guessBtn" class="game-button">제출</button>
+  <button id="retryBtn" class="game-button">↻ 다시 시작</button>
 </div>
 
 <div id="wrongGuesses" style="display: none;">
@@ -334,10 +353,6 @@
   <div id="player2Score"></div>
 </div>
 
-<div class="controls">
-  <button id="retryBtn" class="game-button">↻ 다시 시작</button>
-  <button onclick="location.href='index.html'" class="game-button">← 뒤로 가기</button>
-</div>
 
 
   </div>
