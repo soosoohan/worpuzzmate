@@ -76,14 +76,8 @@ We plan to develop games with more diverse topics and in various languages such 
 |medium  영 12x12 한 10x10    | 워퍼즈   | 워퍼즈 메이트    |
 |large 영 18x12 한 15x11    | 워퍼즈 몽이    | 워퍼즈 찌니   |
 
------
-이 저작물은 한국저작권위원회에 등록되어 법적 보호를 받습니다.
 
-| 게임 | 등록번호 | 등록일 |
-|------|----------|--------|
-| 워퍼즈(worpuzz)| C-2025-031802 | 2025.08.19 |
-
-## 워퍼즈메이트 주소 : http://soosooland.com/worpuzzmate/
+### 워퍼즈메이트 주소 : http://soosooland.com/worpuzzmate/
 ---
 
 ## 🌟 Soosooland - Puzzle Game Hub by Han Soosoo
@@ -94,6 +88,11 @@ Explore more brain games and puzzles in **[Soosooland](https://soosooland.com/)*
 — a digital playground designed to improve memory, logic, and creativity while having fun!
 
 ---
+이 저작물은 한국저작권위원회에 등록되어 법적 보호를 받습니다.
+
+| 게임 | 등록번호 | 등록일 |
+|------|----------|--------|
+| 워퍼즈(worpuzz)| C-2025-031802 | 2025.08.19 |
 
 ### 👤 만든 사람 | Credits
 
