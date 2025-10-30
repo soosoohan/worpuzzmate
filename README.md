@@ -57,6 +57,7 @@ We plan to develop games with more diverse topics and in various languages such 
 |large 영 18x12 한 15x11    | 워퍼즈 몽(Worpuzz Mong)    | 워퍼즈 찌니(Worpuzz ZZini)   |
  
 ---
+## 워퍼즈메이트 주소 : https://soosooland.com/worpuzzmate/ 
 
 ## 🌟 Soosooland - Puzzle Game Hub by Han Soosoo
 
