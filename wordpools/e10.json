@@ -1,0 +1,23 @@
+
+{
+"__comment": "e10",
+  "title": "WORPUZZ ",
+"description": "US Landmarks",
+
+  "words": {
+  "5": ["MET","MOMA", "ZION""ALAMO", "LACMA"],
+  "6": ["ACADIA", "ARCHES", "DENALI", "MALIBU"],
+  "7": ["OLYMPIC", "ROCKIES", "SEQUOIA", "THE_MET", "GLACIER", "RAINIER", "WAIKIKI", "WHITNEY"],
+  "8": ["BIG_BEND", "YOSEMITE", "ALCATRAZ", "COLORADO", "MISSOURI","JAMESTOWN", "LAKE_ERIE"],
+  "10": ["EVERGLADES", "HUDSON_BAY","MESA_VERDE", "GETTYSBURG", "GUGGENHEIM", "LAKE_HURON", "LAKE_TAHOE", "OHIO_RIVER", "CRATER_LAKE"],
+  "11": ["GRAND_TETON", "SMITHSONIAN", "YELLOWSTONE", "MIAMI_BEACH", "MISSISSIPPI", "WHITE_HOUSE"]
+ },
+ "wordCount": {
+    "5": 1,
+    "6": 1,
+    "7": 2,
+    "8": 2,
+   "10": 2,
+    "11": 1
+   }
+}
