@@ -354,8 +354,6 @@
   <div id="player2Score"></div>
 </div>
 
-
-
   </div>
 
 </div>
@@ -416,7 +414,7 @@ window.onload = () => {
   const poolFile = urlParams.get('pool');
   if (!poolFile) {
     // 임시로 기본 단어들 설정
-  words = ['CAT', 'GAME', 'PLAY', 'WORD', 'PUZZLE', 'FIND', 'CLICK', 'DOG'];
+words = ['CAT', 'AGE', 'AREA', 'AWAY','ALSO','BABY','ABOUT', 'ADULT', 'AGAIN','AFTER','ACROSS','ACTION','ACTRESS','ACTIVITY','AFTERNOON'];
     gameSection.classList.remove('hidden');
     init();
     return;
@@ -535,8 +533,8 @@ window.onload = () => {
     }
     
     // 클로버/데이지 배치 (단어 영역 피하기)
-    placeDaisies(9);
-    placeClovers(16);
+    placeDaisies(21);
+    placeClovers(14);
     fillEmptyCells();
     updateScore();
     updateTurnDisplay();
