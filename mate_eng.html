@@ -33,7 +33,13 @@
     <link rel="alternate" hreflang="en" href="https://soosooland.com/woepuzzmate/mate_eng.html">
     <link rel="stylesheet" href="https://soosooland.com/css/protection.css">
     <script src="https://soosooland.com/js/protection.js"></script>
- <style>
+ <script>
+// 워드풀 데이터가 없으면 메인으로 리다이렉트
+if (!sessionStorage.getItem('wordPool') && !localStorage.getItem('wordPool')) {
+    window.location.href = 'https://soosooland.com/worpuzzmate/';
+}
+</script>
+<style>
     
     * {
       box-sizing: border-box;
